@@ -5,7 +5,8 @@
 
 //  Dependencies
 const server = require('./lib/server')
-const workers = require('./lib/workers')
+// const workers = require('./lib/workers')
+const db = require('./lib/db')
 
 //  Declare the app
 let app = {}
@@ -16,7 +17,9 @@ app.init = ()=>{
   server.init()
 
   //  Start the workers
-  workers.init()
+  // workers.init()
+  //  Start the database
+  db.init()
 }
 
 //  Execute

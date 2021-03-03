@@ -36,7 +36,8 @@ handlers._users.post = (data, callback)=>{
     _db.run(`SELECT email from users WHERE email="${email}"`, (err, data)=>{
         if(!err){
             if(data.result.length == 0){
-                _db.run(`INSERT INTO users (email, password) VALUES ("${email}", "${hash(password)}")`, (err, data)=>{
+                const employee_id = createRandomString(12)
+                _db.run(`INSERT INTO users (employee_id, email, password) VALUES ("${employee_id}", "${email}", "${hash(password)}")`, (err, data)=>{
                     if(!err && data.result.affectedRows > 0){
                         callback(200)
                     }else{
