@@ -19,7 +19,7 @@ db.con = createConnection({
 db.init = ()=>{
     db.con.connect((err) => {
             if (!err) {
-                console.log('\x1b[36m%s\x1b[0m', `DB connected`)
+                console.log('\x1b[34m%s\x1b[0m', `DB connected`)
             } else {
                 callback('Error connecting to the database')
             }
