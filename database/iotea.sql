@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `process`(
     `end_time`  TIME DEFAULT NULL,
     `elapse_time` TIME DEFAULT NULL,
     `employee_id` VARCHAR(12) NOT NULL,
-    FOREIGN KEY (`employee_id`) REFERENCES `users`(`employee_id`)  
+    FOREIGN KEY (`employee_id`) REFERENCES `users`(`employee_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `teadata`(
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `teadata`(
     `temperature` FLOAT(6) NOT NULL,
     `humidity` FLOAT(6) NOT NULL,
     `image_url` VARCHAR(20) NOT NULL UNIQUE,
-    `image_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
+    `image_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (`process_id`) REFERENCES `process`(`process_id`)
 );
 
