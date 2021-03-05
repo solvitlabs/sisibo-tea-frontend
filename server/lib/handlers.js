@@ -297,9 +297,9 @@ handlers._tokens.post = (data, callback)=>{
     const password = typeof data.payload.password == 'string' && data.payload.password.trim().length > 0 ? data.payload.password.trim() : false
     if(email && password){
       //  Lookup the user who matches that email
-      run(`SELECT employee_id, password FROM users WHERE email = "${email}" AND password = "${hash(password)}"`, (err, data)=>{
+      run(`SELECT employee_id, password, status FROM users WHERE email = "${email}" AND password = "${hash(password)}"`, (err, data)=>{
         if(!err){
-          if(data.result.length != 0){
+          if(data.result.length != 0 && data.result[0].status){
             //  If there is a match, create a new token with a random name. Set expiration data 1 hour in the future
             const tokenId = createRandomString(20)
             const expires = Date.now() + 1000 * 60 *60 //milliseconds
@@ -317,7 +317,7 @@ handlers._tokens.post = (data, callback)=>{
               }
             })
           }else{
-            callback(400, {'Error':'User does not exist'})
+            callback(400, {'Error':'User does not exist or is inactive'})
           }
         }else{
           callback(500, err)

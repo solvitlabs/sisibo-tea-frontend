@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     login() {
-      fetch("http://localhost:3000/tokens", {
+      fetch("/api/tokens", {
         method: "post",
         headers: {
           Accept: "application/json",
