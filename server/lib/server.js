@@ -106,7 +106,9 @@ server.unifiedServer = (req, res)=>{
 server.router = {
   'api/ping' : handlers.ping,
   'api/users' : handlers.users,
-  'api/tokens' : handlers.tokens
+  'api/tokens' : handlers.tokens,
+  'api/process' : handlers.process,
+  'api/teadata' : handlers.teadata
 }
 
 //  Init script

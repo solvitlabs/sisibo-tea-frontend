@@ -193,17 +193,16 @@ handlers._process = {}
 //  Optional data: none
 handlers._process.post = (data, callback)=>{
   const startTime = typeof data.payload.start_time == 'string' && data.payload.start_time.length > 0 ? data.payload.start_time.trim() : false
-  const elapseTime = typeof data.payload.elapse_time == 'string' && data.payload.elapse_time.length > 0 ? data.payload.elapse_time.trim() : false
   const employeeId = typeof data.payload.employee_id == 'string' && data.payload.employee_id.length == 12 ? data.payload.employee_id.trim() : false
 
-  if(startTime && elapseTime && employeeId){
+  if(startTime && employeeId){
     //  Get the token from the headers
     const token = typeof data.headers.token == 'string' ? data.headers.token : false
     //  verify that the given token is valid for the employee_id
     handlers._tokens.verifyToken(token, employeeId, (tokenIsValid)=>{
       if(tokenIsValid){
         //  store values
-        run(`INSERT INTO process (start_time, elapse_time, employee_id) VALUES ("${startTime}", "${elapseTime}", "${employeeId}")`, (err, data)=>{
+        run(`INSERT INTO process (start_time, employee_id) VALUES ("${startTime}", "${employeeId}")`, (err, data)=>{
           if(!err && data.result.affectedRows > 0){
             callback(200)
           }else{
@@ -223,8 +222,8 @@ handlers._process.post = (data, callback)=>{
 //  Required data: id
 //  Optional data: none
 handlers._process.get = (data, callback)=>{
-  const employeeId = typeof data.queryStringObject.userId == 'string' && data.queryStringObject.userId.length > 0 
-  const processId = typeof data.queryStringObject.id == 'number' ? data.queryStringObject.id : false
+  const employeeId = typeof data.queryStringObject.userId == 'string' && data.queryStringObject.userId.length > 0 ? data.queryStringObject.userId.trim() : false
+  const processId = typeof data.queryStringObject.id != 'undefined' && typeof (data.queryStringObject.id * 1) == 'number' ? data.queryStringObject.id : false
   if(processId && employeeId){
     const token = typeof data.headers.token == 'string' ? data.headers.token : false
     handlers._tokens.verifyToken(token, employeeId, (tokenIsValid)=>{
@@ -252,27 +251,102 @@ handlers._process.get = (data, callback)=>{
 // @process - put
 //  Required data: end_time, process_id
 //  Optional data: none
-handlers._process.put = (data, callback)=>{
-  const processId = typeof data.payload.id == 'number' ? data.payload.id : false
-  const employeeId = typeof data.payload.userId == 'string' && data.payload.userId.length > 0 ? data.payload.userId.trim() : false
-  const endTime = typeof data.payload.end_time == 'string' && data.payload.end_time.length > 0 ? data.payload.end_time.trim() : false
-  if(employeeId && endTime){
-    const token = typeof data.headers.token == 'string' ? data.headers.token : false
-    handlers._tokens.verifyToken(token, employeeId, (tokenIsValid)=>{
-      if(tokenIsValid){
-        run(`UPDATE process SET end_time = "${endTime}" WHERE process_id = "${processId}"`, (err, data)=>{
-          if(!err && data.result.affectedRows > 0){
-            callback(200)
-          }else{
-            callback(500, {'Error':'Could not update the end_time'})
-          }
-        })
+// handlers._process.put = (data, callback)=>{
+//   const processId = typeof data.payload.id != 'undefined' && typeof (data.payload.id * 1) == 'number' ? data.payload.id : false
+//   const employeeId = typeof data.payload.user_id == 'string' && data.payload.user_id.length > 0 ? data.payload.user_id.trim() : false
+//   // const elapseTime = typeof data.payload.elapse_time == 'string' && data.payload.elapse_time.length > 0 ? data.payload.elapse_time.trim() : false
+//   const endTime = typeof data.payload.end_time == 'string' && data.payload.end_time.length > 0 ? data.payload.end_time.trim() : false
+//   if(employeeId && processId && endTime){
+//     const token = typeof data.headers.token == 'string' ? data.headers.token : false
+//     handlers._tokens.verifyToken(token, employeeId, (tokenIsValid)=>{
+//       if(tokenIsValid){
+//         let startTime, elapseTime;
+//         //  Get the start_time
+//         run(`SELECT start_time WHERE process_id = "${processId}"`, (err, data)=>{
+//           if(!err){
+//             if(data.result.length > 0){
+//               startTime = data.result[0].start_time
+//               //  Calculate elapse_time
+//               elapseTime = endTime - startTime
+//               run(`UPDATE process SET end_time = "${endTime}" WHERE process_id = "${processId}"`, (err, data)=>{
+//                 if(!err && data.result.affectedRows > 0){
+//                   callback(200)
+//                 }else{
+//                   callback(500, {'Error':'Could not update the end_time'})
+//                 }
+//               })
+//             }else{
+//               callback(404)
+//             }
+//           }else{
+//             callback(500, err)
+//           }
+//         })
+//       }else{
+//         callback(403,{'Error':'Missing required token in header, or token is invalid'})
+//       }
+//     })
+//   }else{
+//     callback(400, {'Error':'Missing required field'})
+//   }
+// }
+
+//  @teadata
+handlers.teadata = (data, callback)=>{
+  const acceptableMethods = ['post', 'get']
+  if(acceptableMethods.indexOf(data.method) > -1){
+    handlers._teadata[data.method](data, callback)
+  }else{
+    callback(405)
+  }
+}
+
+//  Container for all the teadata methods
+handlers._teadata = {}
+
+//  @teadata - post
+//  Required data: process_id, red, green, blue, temperature, humidity, image_url
+//  Optional data: none
+handlers._teadata.post = (data, callback)=>{
+  const processId = typeof data.payload.id != 'undefined' && typeof (data.payload.id * 1) == 'number' ? data.payload.id : false
+  const red = typeof data.payload.red != 'undefined' && typeof (data.payload.red * 1) == 'number' && (data.payload.red * 1) >= 0 && (data.payload.red * 1) <= 255 ? data.payload.red : false
+  const green = typeof data.payload.green != 'undefined' && typeof (data.payload.green * 1) == 'number' && (data.payload.green * 1) >= 0 && (data.payload.green * 1) <= 255 ? data.payload.green : false
+  const blue = typeof data.payload.blue != 'undefined' && typeof (data.payload.blue * 1) == 'number' && (data.payload.blue * 1) >= 0 && (data.payload.blue * 1) <= 255 ? data.payload.blue : false
+  const temperature = typeof data.payload.temperature != 'undefined' && typeof (data.payload.temperature * 1) == 'number' ? data.payload.temperature : false
+  const humidity = typeof data.payload.humidity != 'undefined' && typeof (data.payload.humidity * 1) == 'number' ? data.payload.humidity : false
+  const image = typeof data.payload.image == 'string' && data.payload.image.length > 0 ? data.payload.image.trim() : false
+  if(processId && red && green && blue && temperature && humidity && image){
+    run(`INSERT INTO teadata (process_id, red, green, blue, temperature, humidity, image) VALUES ("${processId}", "${red}", "${green}", "${blue}", "${temperature}", "${humidity}", "${image}")`, (err, data)=>{
+      if(!err && data.result.affectedRows > 0){
+        callback(200)
       }else{
-        callback(403,{'Error':'Missing required token in header, or token is invalid'})
+        callback(500, {'Error':'failed to create teadata'})
       }
     })
   }else{
-    callback(400, {'Error':'Missing required field'})
+    callback(400, {'Error' : 'Missing required field(s)'})
+  }
+}
+
+//  @teadata - get
+//  Required data: id
+//  Optional data: none
+handlers._teadata.get = (data, callback)=>{
+  const processId = typeof data.queryStringObject.id != 'undefined' && typeof (data.queryStringObject.id * 1) == 'number' ? data.queryStringObject.id : false
+  if(processId){
+    run(`SELECT * FROM teadata WHERE process_id = "${processId}"`, (err, data)=>{
+      if(!err){
+        if(data.result.length > 0){
+          callback(200, {...data.result[0]})
+        }else{
+          callback(404)
+        }
+      }else{
+        callback(500, err)
+      }
+    })
+  }else{
+    callback(400, {'Error' : 'Missing required field(s)'})
   }
 }
 
