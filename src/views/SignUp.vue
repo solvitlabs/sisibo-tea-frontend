@@ -71,7 +71,7 @@ export default {
       if (this.firstPassword != this.secondPassword) {
         this.showPasswordError = true;
       } else {
-        fetch("http://localhost:3000/users", {
+        fetch("/api/users", {
           method: "post",
           headers: {
             Accept: "application/json",

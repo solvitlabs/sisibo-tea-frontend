@@ -87,8 +87,9 @@ server.unifiedServer = (req, res)=>{
       const payloadString = JSON.stringify(payload)
 
       // Return the response
-      res.setHeader('Content-Type', 'application/json')
-      res.writeHead(statusCode)
+      res.writeHead(statusCode, {
+        'Content-Type' : 'application/json'
+      })
       res.end(payloadString)
 
       //  If the response is 200, print green otherwise print red
@@ -103,9 +104,9 @@ server.unifiedServer = (req, res)=>{
 
 // Define a request router
 server.router = {
-  'ping' : handlers.ping,
-  'users' : handlers.users,
-  'tokens' : handlers.tokens
+  'api/ping' : handlers.ping,
+  'api/users' : handlers.users,
+  'api/tokens' : handlers.tokens
 }
 
 //  Init script
