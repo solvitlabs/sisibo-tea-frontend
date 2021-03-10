@@ -2,7 +2,6 @@
     <div class="co-md-6 grid-margin stretch-card">
       <div class="col d-flex justify-content-center">
           <div class="card w-50">
-            <span class="border border-dark">
               <form class="forms-sample" @submit.prevent="signUp">
                 <div class="Center">
                   <div class="inner-block">
@@ -50,7 +49,6 @@
                   </div>
                 </div>
               </form>
-            </span> 
           </div>
       </div>
     </div>
