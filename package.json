@@ -9,8 +9,11 @@
     "dev": "nodemon ./server/index.js"
   },
   "dependencies": {
+    "@sideway/address": "^4.1.1",
     "bootstrap": "^4.6.0",
+    "chokidar": "^3.5.1",
     "core-js": "^3.6.5",
+    "joi": "^17.4.0",
     "mysql": "^2.18.1",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1"
