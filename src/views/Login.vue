@@ -1,34 +1,41 @@
 <template>
   <div class="col-md-6 grid-margin stretch-card">
-    <div class="card">
-      <form class="forms-sample" @submit.prevent="login">
-        <div class="card-body">
-          <h4 class="card-title">Login</h4>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              required
-              v-model="email"
-            />
+    <div class="col d-flex justify-content-center">
+      <div class="card w-50">
+        <form class="forms-sample" @submit.prevent="login">
+          <div class="Center">
+            <div class="inner-block">
+              <div class="card-body">
+                <h4 class="card-title">Sisibo Tea Factory</h4>
+                <h5>Login</h5>
+                <div class="form-group">
+                  <label for="email">Email address</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                    v-model="email"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="firstPassword">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="firstPassword"
+                    minlength="8"
+                    required
+                    v-model="password"
+                  />
+                </div>
+                <button type="submit" class="btn btn-success mr-2">Login</button>
+                <button class="btn btn-light">Cancel</button>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="firstPassword">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="firstPassword"
-              minlength="8"
-              required
-              v-model="password"
-            />
-          </div>
-          <button type="submit" class="btn btn-success mr-2">Login</button>
-          <button class="btn btn-light">Cancel</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </template>
