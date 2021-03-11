@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar />
-    <div class="co-md-6 grid-margin stretch-card">
+    <div class="co-md-6 grid-margin stretch-card" id="signup-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
           <form class="forms-sample Center shadow" @submit.prevent="signUp">
