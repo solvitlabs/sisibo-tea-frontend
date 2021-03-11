@@ -98,17 +98,41 @@
           </div>
         </div>
       </div>
+      <div class="mx-3 my-4">
+        <canvas id="temperature-chart"></canvas>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Navbar from "../layout/Navbar";
+import Chart from "chart.js";
+import tempChartData from "../layout/chart-data.js";
 
 export default {
   name: "dashboard",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      tempChartData: tempChartData,
+    };
+  },
+  methods: {
+    createChart(chartId, chartData) {
+      const ctx = document.getElementById(chartId);
+      const myChart = new Chart(ctx, {
+        type: chartData.type,
+        data: chartData.data,
+        options: chartData.options,
+      });
+      myChart;
+    },
+  },
+  mounted() {
+    this.createChart("temperature-chart", this.tempChartData);
   },
 };
 </script>
