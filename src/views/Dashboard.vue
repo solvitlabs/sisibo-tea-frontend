@@ -8,7 +8,7 @@
           <div>
             <img
               class="card-img-top"
-              src="../assets/img/logo.jpg"
+              src="../assets/images/logo.jpg"
               alt="Card image cap"
             />
             <div class="py-2 px-4">
@@ -39,7 +39,7 @@
           <div>
             <img
               class="card-img-top"
-              src="../assets/img/logo.jpg"
+              src="../assets/images/logo.jpg"
               alt="Card image cap"
             />
             <div class="py-2 px-4">
@@ -70,7 +70,7 @@
           <div>
             <img
               class="card-img-top"
-              src="../assets/img/logo.jpg"
+              src="../assets/images/logo.jpg"
               alt="Card image cap"
             />
             <div class="py-2 px-4">
