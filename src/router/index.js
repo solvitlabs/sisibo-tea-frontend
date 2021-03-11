@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SignUp from '../views/SignUp.vue'
+import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
         path: '/',
-        name: 'SignUp',
-        component: SignUp
+        name: 'Login',
+        component: Login
     },
     {
-        path: '/login',
-        name: 'Login',
-        component: () => import( /* webpackChunkName: "login" */ '../views/Login.vue')
+        path: '/signup',
+        name: 'SignUp',
+        component: () => import( /* webpackChunkName: "signup" */ '../views/SignUp.vue')
     },
     {
         path: '/dashboard',

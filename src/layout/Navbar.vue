@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="roof"></div>
     <nav class="navbar navbar-light bg-white shadow">
       <router-link class="navbar-brand" to="/">SISIBO TEA</router-link>
       <button
@@ -18,8 +17,8 @@
       <div class="navbar-collapse collapse" id="navbarSidebar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <router-link class="nav-link" to="/">Sign Up</router-link>
-            <router-link class="nav-link" to="/login">Login</router-link>
+            <router-link class="nav-link" to="/signup">Sign Up</router-link>
+            <router-link class="nav-link" to="/">Login</router-link>
             <router-link class="nav-link" to="/dashboard"
               >Dashboard</router-link
             >
