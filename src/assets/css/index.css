@@ -16,8 +16,6 @@ html {
 }
 
 .inner-block {
-    /*width: 450px;
-    margin: auto; */
     background: black;
     opacity: 0.8;
     position: absolute;
@@ -26,8 +24,4 @@ html {
     bottom: 0;
     right: 0;
     z-index: 2050;
-    /*box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-    padding: 40px 55px 45px 55px;
-    border-radius: 15px;
-    transition: all .3s; */
 }
