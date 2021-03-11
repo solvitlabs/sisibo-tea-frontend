@@ -1,5 +1,5 @@
-body,
-html {
+#signup-page,
+#login-page {
     height: 100%;
     background-image: url("~@/assets/images/plantation-166515_1280.jpg");
 }
