@@ -12,12 +12,10 @@ html {
     left: 43%;
     margin-top: -100px;
     margin-left: -100px;
-    color: white;
 }
 
 .inner-block {
-    background: black;
-    opacity: 0.8;
+    background: white;
     position: absolute;
     top: 0;
     left: 0;
