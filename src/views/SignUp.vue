@@ -6,8 +6,7 @@
         <div class="card w-50">
           <form class="forms-sample Center" @submit.prevent="signUp">
             <div class="card-body inner-block">
-              <h4 class="card-title">Sisibo Tea Factory</h4>
-              <h5>Sign up</h5>
+              <h4>Sign up</h4>
               <div class="form-group">
                 <label for="email">Email address</label>
                 <input

@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav class="navbar navbar-light bg-white shadow">
-      <router-link class="navbar-brand" to="/">SISIBO TEA</router-link>
+      <router-link class="navbar-brand" to="/">SISIBO TEA FACTORY</router-link>
       <button
         class="navbar-toggler collapsed"
         id="navbarBtn"
