@@ -4,7 +4,7 @@
     <div class="co-md-6 grid-margin stretch-card">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
-          <form class="forms-sample Center" @submit.prevent="signUp">
+          <form class="forms-sample Center shadow" @submit.prevent="signUp">
             <div class="card-body inner-block">
               <h4>Sign up</h4>
               <div class="form-group">
