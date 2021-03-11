@@ -4,53 +4,49 @@
     <div class="co-md-6 grid-margin stretch-card">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
-          <form class="forms-sample" @submit.prevent="signUp">
-            <div class="Center">
-              <div class="inner-block">
-                <div class="card-body">
-                  <h4 class="card-title">Sisibo Tea Factory</h4>
-                  <h5>Sign up</h5>
-                  <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="email"
-                      required
-                      v-model="email"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="firstPassword">Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="firstPassword"
-                      minlength="8"
-                      required
-                      v-model="firstPassword"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="secondPassword">Confirm Password</label>
-                    <input
-                      type="password"
-                      class="form-control"
-                      id="secondPassword"
-                      minlength="8"
-                      required
-                      v-model="secondPassword"
-                    />
-                  </div>
-                  <div class="text-danger mb-2" v-show="showPasswordError">
-                    Passwords don't match
-                  </div>
-                  <button type="submit" class="btn btn-success mr-2">
-                    Sign Up
-                  </button>
-                  <button class="btn btn-light">Cancel</button>
-                </div>
+          <form class="forms-sample Center" @submit.prevent="signUp">
+            <div class="card-body inner-block">
+              <h4 class="card-title">Sisibo Tea Factory</h4>
+              <h5>Sign up</h5>
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  required
+                  v-model="email"
+                />
               </div>
+              <div class="form-group">
+                <label for="firstPassword">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="firstPassword"
+                  minlength="8"
+                  required
+                  v-model="firstPassword"
+                />
+              </div>
+              <div class="form-group">
+                <label for="secondPassword">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="secondPassword"
+                  minlength="8"
+                  required
+                  v-model="secondPassword"
+                />
+              </div>
+              <div class="text-danger mb-2" v-show="showPasswordError">
+                Passwords don't match
+              </div>
+              <button type="submit" class="btn btn-success mr-2">
+                Sign Up
+              </button>
+              <button class="btn btn-light">Cancel</button>
             </div>
           </form>
         </div>
