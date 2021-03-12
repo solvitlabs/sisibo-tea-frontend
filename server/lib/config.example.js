@@ -22,6 +22,11 @@ environments.staging = {
     user: '',
     password: ''
   },
+  mailgun:{
+    apiKey:'',
+    domain:'',
+    email:''
+  }
 }
 
 //Production environment
@@ -41,6 +46,11 @@ environments.production = {
     user: '',
     password: ''
   },
+  mailgun:{
+    apiKey:'',
+    domain:'',
+    email:''
+  }
 }
 
 // Determine which environment was passed as a command-line argument
