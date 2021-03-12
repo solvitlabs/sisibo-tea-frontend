@@ -10,11 +10,11 @@ CREATE TABLE IF NOT EXISTS `users`(
 
 CREATE TABLE IF NOT EXISTS `process`(
     `process_id` INT(8) AUTO_INCREMENT NOT NULL PRIMARY KEY, #added AUTO_INCREMENT
-    `start_time` TIME DEFAULT NULL,
-    `end_time`  TIME DEFAULT NULL,
-    `elapse_time` TIME DEFAULT NULL,
+    `start_time` DATETIME DEFAULT NULL,
+    `end_time`  DATETIME DEFAULT NULL,
+    `elapse_time` VARCHAR(255) DEFAULT NULL, #modified from TIME to VARCHAR(255)
     `employee_id` VARCHAR(12) NOT NULL,
-    FOREIGN KEY (`employee_id`) REFERENCES `users`(`employee_id`)
+    FOREIGN KEY (`employee_id`) REFERENCES `users`(`employee_id`)  
 );
 
 CREATE TABLE IF NOT EXISTS `teadata`(
@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `teadata`(
     `blue` INT(3) NOT NULL,
     `temperature` FLOAT(6) NOT NULL,
     `humidity` FLOAT(6) NOT NULL,
-    `image_url` VARCHAR(20) NOT NULL UNIQUE,
-    `image_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `image` VARCHAR(100) NOT NULL UNIQUE, #modified image_url to image and length from 20 to 100
+    `image_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,    
     FOREIGN KEY (`process_id`) REFERENCES `process`(`process_id`)
 );
 
@@ -47,6 +47,6 @@ CREATE TABLE IF NOT EXISTS `Tokens`(
 CREATE TABLE IF NOT EXISTS `email_verification`(
 `id` INT(6) AUTO_INCREMENT PRIMARY KEY,
 `employee_id` VARCHAR(12) NOT NULL, #changed from email to employee_id
-`secret_code` VARCHAR(20) NOT NULL,
+`activation_code` VARCHAR(12) NOT NULL, #changed secret_code to activation_code, and length from 20 to 12
 `expires` VARCHAR(20) NOT NULL
 );

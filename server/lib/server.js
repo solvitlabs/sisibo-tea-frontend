@@ -1,7 +1,7 @@
 //  Dependencies
 const config = require('./config')
 const { run } = require('./db')
-const { hash, createRandomString, parseJsonToObject } = require('./helpers')
+const { hash, createRandomString, parseJsonToObject, msToTime } = require('./helpers')
 const _data = require('./data')
 const express = require('express')
 const app = express()
@@ -384,45 +384,46 @@ app.get("/api/process/:userId/:id", (req, res)=>{
 // @process - put
 //  Required data: end_time, process_id
 //  Optional data: none
-// app.put("/api/process", (data, callback)=>{
-//   const processId = typeof req.body.id != 'undefined' && typeof (req.body.id * 1) == 'number' ? req.body.id : false
-//   const employeeId = typeof req.body.user_id == 'string' && req.body.user_id.length > 0 ? req.body.user_id.trim() : false
-//   // const elapseTime = typeof req.body.elapse_time == 'string' && req.body.elapse_time.length > 0 ? req.body.elapse_time.trim() : false
-//   const endTime = typeof req.body.end_time == 'string' && req.body.end_time.length > 0 ? req.body.end_time.trim() : false
-//   if(employeeId && processId && endTime){
-//     const token = typeof data.headers.token == 'string' ? data.headers.token : false
-//     verifyToken(token, employeeId, (tokenIsValid)=>{
-//       if(tokenIsValid){
-//         let startTime, elapseTime;
-//         //  Get the start_time
-//         run(`SELECT start_time WHERE process_id = "${processId}"`, (err, data)=>{
-//           if(!err){
-//             if(data.result.length > 0){
-//               startTime = data.result[0].start_time
-//               //  Calculate elapse_time
-//               elapseTime = endTime - startTime
-//               run(`UPDATE process SET end_time = "${endTime}" WHERE process_id = "${processId}"`, (err, data)=>{
-//                 if(!err && data.result.affectedRows > 0){
-//                   res.sendStatus(200)
-//                 }else{
-//                   res.status(500).json({'Error':'Could not update the end_time'})
-//                 }
-//               })
-//             }else{
-//               res.sendStatus(404)
-//             }
-//           }else{
-//             res.status(500).json(err)
-//           }
-//         })
-//       }else{
-//         res.status(403).json({'Error':'Missing required token in header, or token is invalid'})
-//       }
-//     })
-//   }else{
-//     res.status(400).json({'Error':'Missing required field'})
-//   }
-// })
+app.put("/api/process", (req, res)=>{
+  const employeeId = typeof req.body.user_id == 'string' && req.body.user_id.length > 0 ? req.body.user_id.trim() : false
+  const processId = typeof req.body.id != 'undefined' && typeof (req.body.id * 1) == 'number' ? req.body.id : false
+  const endTime = typeof req.body.end_time == 'string' && req.body.end_time.length > 0 ? req.body.end_time.trim() : false
+  if(employeeId && processId && endTime){
+    const token = typeof req.headers.token == 'string' ? req.headers.token : false
+    verifyToken(token, employeeId, (tokenIsValid)=>{
+      if(tokenIsValid){
+        let startTime, elapseTime;
+        //  Get the start_time
+        run(`SELECT start_time FROM process WHERE process_id = "${processId}"`, (err, data)=>{
+          if(!err){
+            if(data.result.length > 0){
+              startTime = data.result[0].start_time
+              //  Calculate elapse_time
+              elapseTime = (new Date(endTime) - new Date(startTime)) //milliseconds
+              //  Convert to Days:Hours:Minutes:Seconds string
+              elapseTime = msToTime(elapseTime)
+              run(`UPDATE process SET end_time = "${endTime}", elapse_time = "${elapseTime}" WHERE process_id = "${processId}"`, (err, data)=>{
+                if(!err && data.result.affectedRows > 0){
+                  res.sendStatus(200)
+                }else{
+                  res.status(500).json({'Error':'Could not update the end_time'})
+                }
+              })
+            }else{
+              res.sendStatus(404)
+            }
+          }else{
+            res.status(500).json(err)
+          }
+        })
+      }else{
+        res.status(403).json({'Error':'Missing required token in header, or token is invalid'})
+      }
+    })
+  }else{
+    res.status(400).json({'Error':'Missing required field'})
+  }
+})
 
 //  @teadata - post
 //  Required data: process_id, red, green, blue, temperature, humidity, image_url
