@@ -14,6 +14,8 @@ Use of Jsonwebtokens to generate one time password reset links sent via email
 
 
 ## Config file format (config.example.js)
+
+## Mailgun account
 We need to sort out a way to gain access to one mailgun account or a way of using credentials of one account without exposing them.
 
 ## mysql file schema
