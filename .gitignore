@@ -8,7 +8,6 @@ node_modules
 .env.*.local
 **/config.js
 **/https/
-**/.data/**
 
 # Log files
 npm-debug.log*
