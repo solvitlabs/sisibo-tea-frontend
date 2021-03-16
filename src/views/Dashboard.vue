@@ -101,6 +101,9 @@
       <div class="mx-3 my-4">
         <canvas id="temperature-chart"></canvas>
       </div>
+      <div class="mx-3 my-4">
+        <canvas id="humidity-chart"></canvas>
+      </div>
     </div>
   </div>
 </template>
@@ -109,6 +112,7 @@
 import Navbar from "../layout/Navbar";
 import Chart from "chart.js";
 import tempChartData from "../layout/temp-chart-data.js";
+import humidityChartData from "../layout/humidity-chart-data.js";
 
 export default {
   name: "dashboard",
@@ -118,6 +122,7 @@ export default {
   data() {
     return {
       tempChartData: tempChartData,
+      humidityChartData: humidityChartData,
     };
   },
   methods: {
@@ -133,6 +138,7 @@ export default {
   },
   mounted() {
     this.createChart("temperature-chart", this.tempChartData);
+    this.createChart("humidity-chart", this.humidityChartData);
   },
 };
 </script>
