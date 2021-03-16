@@ -108,7 +108,7 @@
 <script>
 import Navbar from "../layout/Navbar";
 import Chart from "chart.js";
-import tempChartData from "../layout/chart-data.js";
+import tempChartData from "../layout/temp-chart-data.js";
 
 export default {
   name: "dashboard",
