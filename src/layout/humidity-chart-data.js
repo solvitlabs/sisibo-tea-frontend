@@ -6,23 +6,9 @@ export const tempChartData = {
             label: 'Humidity',
             data: [10, 20, 23, 30, 60, 50, 33, 24],
             backgroundColor: [
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
-                'rgba(0, 153, 255, 0.6)',
                 'rgba(0, 153, 255, 0.6)'
             ],
             borderColor: [
-                '#0099ff',
-                '#0099ff',
-                '#0099ff',
-                '#0099ff',
-                '#0099ff',
-                '#0099ff',
-                '#0099ff',
                 '#0099ff',
             ],
             borderWidth: 3

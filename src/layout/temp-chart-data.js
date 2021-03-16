@@ -6,23 +6,9 @@ export const tempChartData = {
             label: 'Temperature',
             data: [10, 20, 23, 30, 60, 50, 33, 24],
             backgroundColor: [
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
                 'rgba(148, 10, 10, 0.6)'
             ],
             borderColor: [
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
                 '#940a0a',
             ],
             borderWidth: 3
