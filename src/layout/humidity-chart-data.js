@@ -3,27 +3,13 @@ export const tempChartData = {
     data: {
         labels: ['1200', '1230', '1300', '1330', '1430', '1500', '1530', '1600'],
         datasets: [{
-            label: 'Temperature',
+            label: 'Humidity',
             data: [10, 20, 23, 30, 60, 50, 33, 24],
             backgroundColor: [
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)',
-                'rgba(148, 10, 10, 0.6)'
+                'rgba(0, 153, 255, 0.6)'
             ],
             borderColor: [
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
-                '#940a0a',
+                '#0099ff',
             ],
             borderWidth: 3
         }]
