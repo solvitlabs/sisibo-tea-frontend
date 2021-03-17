@@ -128,6 +128,7 @@ export default {
       tempChartData: tempChartData,
       humidityChartData: humidityChartData,
       rgbChartData: rgbChartData,
+      apiUrl: "http://localhost:3000",
     };
   },
   methods: {
@@ -140,11 +141,75 @@ export default {
       });
       myChart;
     },
+    getTeadata() {
+      var teadata;
+      fetch(`${this.apiUrl}/api/teadata`)
+        .then((response) => response.json())
+        .then((result) => {
+          teadata = JSON.parse(result);
+          console.log("teadata", teadata.temperature);
+          this.updateAllCharts(teadata);
+        })
+        .catch((error) => console.log("error", error));
+      this.watchForTeadata();
+    },
+    watchForTeadata() {
+      setTimeout(() => {
+        this.getTeadata();
+      }, 360000);
+    },
+    updateAllCharts(teadata) {
+      this.updateChart(
+        "temperature-chart",
+        this.tempChartData,
+        teadata.temperature
+      );
+      this.updateChart(
+        "humidity-chart",
+        this.humidityChartData,
+        teadata.humidity
+      );
+      this.updateRgbChart(teadata.red, teadata.green, teadata.blue);
+    },
+    updateChart(chartDataHtmlId, chartData, chartDataValue) {
+      // Update Label
+      var chartDataLabels = chartData.data.labels;
+      chartDataLabels.shift();
+      chartDataLabels.push((Number(chartDataLabels[8]) + 6).toString());
+      // Update Values
+      var chartDataValues = chartData.data.datasets[0].data;
+      chartDataValues.shift();
+      chartDataValues.push(chartDataValue);
+      // Rerender Chart
+      this.createChart(chartDataHtmlId, chartData);
+    },
+    updateRgbChart(red, green, blue) {
+      // Update Label
+      var rgbChartDataLabels = this.rgbChartData.data.labels;
+      rgbChartDataLabels.shift();
+      rgbChartDataLabels.push((Number(rgbChartDataLabels[8]) + 6).toString());
+      // Update Values
+      //Red
+      var redDataValues = this.rgbChartData.data.datasets[0].data;
+      redDataValues.shift();
+      redDataValues.push(red);
+      //Green
+      var greenDataValues = this.rgbChartData.data.datasets[1].data;
+      greenDataValues.shift();
+      greenDataValues.push(green);
+      //Blue
+      var blueDataValues = this.rgbChartData.data.datasets[2].data;
+      blueDataValues.shift();
+      blueDataValues.push(blue);
+      // Rerender Chart
+      this.createChart("rgb-chart", this.rgbChartData);
+    },
   },
   mounted() {
     this.createChart("temperature-chart", this.tempChartData);
     this.createChart("humidity-chart", this.humidityChartData);
     this.createChart("rgb-chart", this.rgbChartData);
+    this.watchForTeadata();
   },
 };
 </script>
