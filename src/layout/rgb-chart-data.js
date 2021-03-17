@@ -1,4 +1,4 @@
-export const tempChartData = {
+export const rgbChartData = {
     type: 'line',
     data: {
         labels: ['1200', '1230', '1300', '1330', '1430', '1500', '1530', '1600'],
@@ -53,4 +53,4 @@ export const tempChartData = {
     }
 }
 
-export default tempChartData;
+export default rgbChartData;
