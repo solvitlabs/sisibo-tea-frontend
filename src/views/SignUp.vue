@@ -1,11 +1,11 @@
 <template>
   <div>
     <Navbar />
-    <div class="co-md-6 grid-margin stretch-card" id="signup-page">
+    <div class="grid-margin stretch-card" id="signup-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
-          <form class="forms-sample Center shadow" @submit.prevent="signUp">
-            <div class="card-body inner-block">
+          <form class="forms-sample shadow" @submit.prevent="signUp">
+            <div class="card-body">
               <h4>Sign up</h4>
               <div class="form-group">
                 <label for="email">Email address</label>

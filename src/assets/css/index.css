@@ -1,25 +1,6 @@
 #signup-page,
 #login-page {
-    height: 100%;
-    background-image: url("~@/assets/images/plantation-166515_1280.jpg");
-}
-
-.Center {
-    width: 400px;
-    height: 400px;
-    position: fixed;
-    top: 35%;
-    left: 43%;
-    margin-top: -100px;
-    margin-left: -100px;
-}
-
-.inner-block {
-    background: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 2050;
+    background: url("~@/assets/images/plantation-166515_1280.jpg") repeat;
+    padding-top: 5rem;
+    padding-bottom: 50rem;
 }
