@@ -35,16 +35,19 @@
         </div>
       </div>
     </div>
+    <FooterSection />
   </div>
 </template>
 
 <script>
 import Navbar from "../layout/Navbar";
+import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "login",
   components: {
     Navbar,
+    FooterSection,
   },
   data() {
     return {

@@ -51,17 +51,20 @@
         </div>
       </div>
     </div>
+    <FooterSection />
   </div>
 </template>
 
 
 <script>
 import Navbar from "../layout/Navbar";
+import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "sign-up",
   components: {
     Navbar,
+    FooterSection,
   },
   data() {
     return {
@@ -76,7 +79,7 @@ export default {
       if (this.firstPassword != this.secondPassword) {
         this.showPasswordError = true;
       } else {
-        fetch("/api/users", {
+        fetch("http://localhost:3000/api/users", {
           method: "post",
           headers: {
             Accept: "application/json",

@@ -108,11 +108,13 @@
         <canvas id="rgb-chart"></canvas>
       </div>
     </div>
+    <FooterSection />
   </div>
 </template>
 
 <script>
 import Navbar from "../layout/Navbar";
+import FooterSection from "../layout/FooterSection";
 import Chart from "chart.js";
 import tempChartData from "../layout/temp-chart-data.js";
 import humidityChartData from "../layout/humidity-chart-data.js";
@@ -122,6 +124,7 @@ export default {
   name: "dashboard",
   components: {
     Navbar,
+    FooterSection,
   },
   data() {
     return {
