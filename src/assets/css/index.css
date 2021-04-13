@@ -1,10 +1,8 @@
 #signup-page,
-#login-page {
+#login-page,
+#forgotpassword-page,
+#passwordreset-page {
     background: url("~@/assets/images/plantation-166515_1280.jpg") repeat;
     padding-top: 5rem;
     padding-bottom: 50rem;
-}
-
-#reset {
-    padding-top: 200px;
 }

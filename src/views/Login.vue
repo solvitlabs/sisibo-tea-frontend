@@ -64,7 +64,7 @@ export default {
   methods: {
     showEmailNotification() {
       const emailNotificationStored = JSON.parse(
-        localStorage.getItem("emailnotification")
+        localStorage.getItem("emailNotification")
       );
       var emailNotification =
         emailNotificationStored == null
@@ -74,7 +74,7 @@ export default {
         Swal.fire(
           "Verify Email",
           "To Login, verify your email address",
-          "warning"
+          "success"
         );
       }
     },
