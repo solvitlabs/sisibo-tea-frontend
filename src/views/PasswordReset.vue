@@ -8,17 +8,6 @@
             <div class="card-body">
               <h4>Reset Password</h4>
               <div class="form-group">
-                <label for="firstPassword">Old Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="firstPassword"
-                  minlength="8"
-                  required
-                  v-model="oldPassword"
-                />
-              </div>
-              <div class="form-group">
                 <label for="firstPassword">New Password</label>
                 <input
                   type="password"
