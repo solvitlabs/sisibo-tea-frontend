@@ -92,7 +92,7 @@ export default {
         }).then((response) => {
           if (response.status === 200) {
             localStorage.setItem(
-              "emailnotification",
+              "emailNotification",
               JSON.stringify({ emailnotification: 1 })
             );
             this.$router.push("/");
