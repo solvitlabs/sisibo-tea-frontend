@@ -40,9 +40,14 @@ export default {
     Navbar,
     FooterSection,
   },
+  data() {
+    return {
+      email: null,
+    };
+  },
   methods: {
     forgotPassword() {
-      if (email != null) {
+      if (this.email != null) {
         fetch("http://localhost:3000/api/users", {
           method: "put",
           headers: {
