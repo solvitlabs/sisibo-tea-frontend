@@ -4,12 +4,17 @@
     <div class="grid-margin stretch-card" id="forgotpassword-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
-          <form class="forms-sample shadow" @submit.prevent>
+          <form class="forms-sample shadow" @submit.prevent="forgotPassword">
             <div class="card-body">
               <h4>Forgot Password</h4>
               <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control" />
+                <input
+                  type="email"
+                  class="form-control"
+                  required
+                  v-model="email"
+                />
               </div>
               <button type="submit" class="btn btn-success mr-2">
                 Reset password
@@ -32,6 +37,26 @@ export default {
   components: {
     Navbar,
     FooterSection,
+  },
+  methods: {
+    forgotPassword() {
+      if (email != null) {
+        fetch("http://localhost:3000/api/users", {
+          method: "put",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: this.email,
+          }),
+        }).then((response) => {
+          if (response.status === 200) {
+            this.$router.push("/");
+          }
+        });
+      }
+    },
   },
 };
 </script>
