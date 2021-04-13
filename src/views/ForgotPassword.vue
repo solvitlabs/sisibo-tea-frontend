@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import "sweetalert2/dist/sweetalert2.min.css";
 import Navbar from "../layout/Navbar";
 import FooterSection from "../layout/FooterSection";
 
@@ -52,7 +54,11 @@ export default {
           }),
         }).then((response) => {
           if (response.status === 200) {
-            this.$router.push("/");
+            Swal.fire(
+              "Check Email",
+              "To Reset Password, check your email address for a link",
+              "success"
+            );
           }
         });
       }
