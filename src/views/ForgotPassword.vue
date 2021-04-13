@@ -1,20 +1,22 @@
 <template>
   <div>
     <Navbar />
-    <div class="grid-margin stretch-card" id="reset">
+    <div class="grid-margin stretch-card" id="forgotpassword-page">
       <div class="col d-flex justify-content-center">
-        <form class="forms-sample shadow" @submit.prevent>
-          <div class="card-body">
-            <h3>Forgot Password</h3>
-            <div class="form-group">
-              <label>Email address</label>
-              <input type="email" class="form-control form-control-lg" />
+        <div class="card w-50">
+          <form class="forms-sample shadow" @submit.prevent>
+            <div class="card-body">
+              <h4>Forgot Password</h4>
+              <div class="form-group">
+                <label>Email address</label>
+                <input type="email" class="form-control" />
+              </div>
+              <button type="submit" class="btn btn-success mr-2">
+                Reset password
+              </button>
             </div>
-            <button type="submit" class="btn btn-success mr-2">
-              Reset password
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
     <FooterSection />
