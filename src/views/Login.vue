@@ -35,16 +35,21 @@
         </div>
       </div>
     </div>
+    <FooterSection />
   </div>
 </template>
 
 <script>
+import Swal from "sweetalert2/dist/sweetalert2.min.js";
+import "sweetalert2/dist/sweetalert2.min.css";
 import Navbar from "../layout/Navbar";
+import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "login",
   components: {
     Navbar,
+    FooterSection,
   },
   data() {
     return {
@@ -53,7 +58,26 @@ export default {
       showPasswordError: false,
     };
   },
+  mounted() {
+    this.showEmailNotification();
+  },
   methods: {
+    showEmailNotification() {
+      const emailNotificationStored = JSON.parse(
+        localStorage.getItem("emailnotification")
+      );
+      var emailNotification =
+        emailNotificationStored == null
+          ? 0
+          : emailNotificationStored.emailnotification;
+      if (emailNotification === 1) {
+        Swal.fire(
+          "Verify Email",
+          "To Login, verify your email address",
+          "warning"
+        );
+      }
+    },
     login() {
       fetch("/api/tokens", {
         method: "post",
