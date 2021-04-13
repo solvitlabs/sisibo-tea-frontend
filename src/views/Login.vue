@@ -74,7 +74,7 @@ export default {
         Swal.fire(
           "Verify Email",
           "To Login, verify your email address",
-          "warning"
+          "success"
         );
       }
     },
