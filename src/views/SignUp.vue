@@ -42,10 +42,17 @@
               <div class="text-danger mb-2" v-show="showPasswordError">
                 Passwords don't match
               </div>
-              <button type="submit" class="btn btn-success mr-2">
-                Sign Up
-              </button>
-              <button class="btn btn-light">Cancel</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success mr-2">
+                  Sign Up
+                </button>
+                <button class="btn btn-light">Cancel</button>
+              </div>
+              <div class="form-group">
+                <router-link class="link" to="/">
+                  Login instead
+                </router-link>
+              </div>
             </div>
           </form>
         </div>

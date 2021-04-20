@@ -28,8 +28,24 @@
                   v-model="password"
                 />
               </div>
-              <button type="submit" class="btn btn-success mr-2">Login</button>
-              <button class="btn btn-light">Cancel</button>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success mr-2">
+                  Login
+                </button>
+                <button class="btn btn-light">Cancel</button>
+              </div>
+              <div class="form-group">
+                <div>
+                  <router-link class="link" to="/signup">
+                    Create new account
+                  </router-link>
+                </div>
+                <div>
+                  <router-link class="link" to="/forgotpassword">
+                    Forgot your password?
+                  </router-link>
+                </div>
+              </div>
             </div>
           </form>
         </div>

@@ -6,3 +6,12 @@
     padding-top: 5rem;
     padding-bottom: 50rem;
 }
+
+.link {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.link:hover {
+    color: #28a745;
+}
