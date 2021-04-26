@@ -132,6 +132,13 @@ export default {
       humidityChartData: humidityChartData,
       rgbChartData: rgbChartData,
       apiUrl: "http://localhost:3000",
+      teadata: {
+        temperature: [],
+        red: [],
+        green: [],
+        blue: [],
+        humidity: [],
+      },
     };
   },
   methods: {
@@ -144,6 +151,27 @@ export default {
       });
       myChart;
     },
+    getMultipleTeadata() {
+      var teadataResponse;
+      fetch(`${this.apiUrl}/api/teadata/multiple?count=3`)
+        .then((response) => response.json())
+        .then((result) => {
+          teadataResponse = JSON.parse(result).teadata;
+          this.extractAllData(teadataResponse);
+        })
+        .catch((error) => console.log("error", error));
+    },
+    extractAllData(teadataResponse) {
+      for (let k = 0; k < teadataResponse.length; k++) {
+        const teadataRow = teadataResponse[k];
+        this.teadata.temperature.push(teadataRow.temperature);
+        this.teadata.humidity.push(teadataRow.humidity);
+        this.teadata.red.push(teadataRow.red);
+        this.teadata.green.push(teadataRow.green);
+        this.teadata.blue.push(teadataRow.blue);
+      }
+      this.updateAllCharts(this.teadata, true);
+    },
     getTeadata() {
       var teadata;
       fetch(`${this.apiUrl}/api/teadata`)
@@ -151,7 +179,7 @@ export default {
         .then((result) => {
           teadata = JSON.parse(result);
           console.log("teadata", teadata.temperature);
-          this.updateAllCharts(teadata);
+          this.updateAllCharts(teadata, false);
         })
         .catch((error) => console.log("error", error));
       this.watchForTeadata();
@@ -161,32 +189,48 @@ export default {
         this.getTeadata();
       }, 360000);
     },
-    updateAllCharts(teadata) {
+    updateAllCharts(teadata, isMultiple) {
       this.updateChart(
         "temperature-chart",
         this.tempChartData,
-        teadata.temperature
+        teadata.temperature,
+        isMultiple
       );
       this.updateChart(
         "humidity-chart",
         this.humidityChartData,
-        teadata.humidity
+        teadata.humidity,
+        isMultiple
       );
-      this.updateRgbChart(teadata.red, teadata.green, teadata.blue);
+      this.updateRgbChart(teadata.red, teadata.green, teadata.blue, isMultiple);
     },
-    updateChart(chartDataHtmlId, chartData, chartDataValue) {
+    updateMultipleValues(chartDataValues, chartDataValue) {
+      for (let l = 0; l < chartDataValue.length; l++) {
+        chartDataValues.push(chartDataValue[l]);
+      }
+      return chartDataValues;
+    },
+    updateChart(chartDataHtmlId, chartData, chartDataValue, isMultiple) {
       // Update Label
       var chartDataLabels = chartData.data.labels;
       chartDataLabels.shift();
       chartDataLabels.push((Number(chartDataLabels[8]) + 6).toString());
       // Update Values
       var chartDataValues = chartData.data.datasets[0].data;
-      chartDataValues.shift();
-      chartDataValues.push(chartDataValue);
+      if (isMultiple) {
+        chartDataValues = this.updateMultipleValues(
+          chartDataValues,
+          chartDataValue
+        );
+      } else {
+        chartDataValues.shift();
+        chartDataValues.push(chartDataValue);
+      }
       // Rerender Chart
       this.createChart(chartDataHtmlId, chartData);
     },
-    updateRgbChart(red, green, blue) {
+
+    updateRgbChart(red, green, blue, isMultiple) {
       // Update Label
       var rgbChartDataLabels = this.rgbChartData.data.labels;
       rgbChartDataLabels.shift();
@@ -194,16 +238,28 @@ export default {
       // Update Values
       //Red
       var redDataValues = this.rgbChartData.data.datasets[0].data;
-      redDataValues.shift();
-      redDataValues.push(red);
+      if (isMultiple) {
+        redDataValues = this.updateMultipleValues(redDataValues, red);
+      } else {
+        redDataValues.shift();
+        redDataValues.push(red);
+      }
       //Green
       var greenDataValues = this.rgbChartData.data.datasets[1].data;
-      greenDataValues.shift();
-      greenDataValues.push(green);
+      if (isMultiple) {
+        greenDataValues = this.updateMultipleValues(greenDataValues, green);
+      } else {
+        greenDataValues.shift();
+        greenDataValues.push(green);
+      }
       //Blue
       var blueDataValues = this.rgbChartData.data.datasets[2].data;
-      blueDataValues.shift();
-      blueDataValues.push(blue);
+      if (isMultiple) {
+        blueDataValues = this.updateMultipleValues(blueDataValues, blue);
+      } else {
+        blueDataValues.shift();
+        blueDataValues.push(blue);
+      }
       // Rerender Chart
       this.createChart("rgb-chart", this.rgbChartData);
     },
@@ -212,6 +268,7 @@ export default {
     this.createChart("temperature-chart", this.tempChartData);
     this.createChart("humidity-chart", this.humidityChartData);
     this.createChart("rgb-chart", this.rgbChartData);
+    this.getMultipleTeadata();
     this.watchForTeadata();
   },
 };
