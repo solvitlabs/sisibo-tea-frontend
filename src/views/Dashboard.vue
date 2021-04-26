@@ -157,11 +157,11 @@ export default {
         .then((response) => response.json())
         .then((result) => {
           teadataResponse = JSON.parse(result).teadata;
-          this.extractAllData(teadataResponse);
+          this.extractMultipleTeadata(teadataResponse);
         })
         .catch((error) => console.log("error", error));
     },
-    extractAllData(teadataResponse) {
+    extractMultipleTeadata(teadataResponse) {
       for (let k = 0; k < teadataResponse.length; k++) {
         const teadataRow = teadataResponse[k];
         this.teadata.temperature.push(teadataRow.temperature);
@@ -204,7 +204,7 @@ export default {
       );
       this.updateRgbChart(teadata.red, teadata.green, teadata.blue, isMultiple);
     },
-    updateMultipleValues(chartDataValues, chartDataValue) {
+    updateMultipleDataValues(chartDataValues, chartDataValue) {
       for (let l = 0; l < chartDataValue.length; l++) {
         chartDataValues.push(chartDataValue[l]);
       }
@@ -218,7 +218,7 @@ export default {
       // Update Values
       var chartDataValues = chartData.data.datasets[0].data;
       if (isMultiple) {
-        chartDataValues = this.updateMultipleValues(
+        chartDataValues = this.updateMultipleDataValues(
           chartDataValues,
           chartDataValue
         );
