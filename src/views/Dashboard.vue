@@ -153,7 +153,7 @@ export default {
     },
     getMultipleTeadata() {
       var teadataResponse;
-      fetch(`${this.apiUrl}/api/teadata/multiple?count=3`)
+      fetch(`${this.apiUrl}/api/teadata/4`)
         .then((response) => response.json())
         .then((result) => {
           teadataResponse = JSON.parse(result).teadata;
