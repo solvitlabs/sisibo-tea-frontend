@@ -239,7 +239,7 @@ export default {
       //Red
       var redDataValues = this.rgbChartData.data.datasets[0].data;
       if (isMultiple) {
-        redDataValues = this.updateMultipleValues(redDataValues, red);
+        redDataValues = this.updateMultipleDataValues(redDataValues, red);
       } else {
         redDataValues.shift();
         redDataValues.push(red);
@@ -247,7 +247,7 @@ export default {
       //Green
       var greenDataValues = this.rgbChartData.data.datasets[1].data;
       if (isMultiple) {
-        greenDataValues = this.updateMultipleValues(greenDataValues, green);
+        greenDataValues = this.updateMultipleDataValues(greenDataValues, green);
       } else {
         greenDataValues.shift();
         greenDataValues.push(green);
@@ -255,7 +255,7 @@ export default {
       //Blue
       var blueDataValues = this.rgbChartData.data.datasets[2].data;
       if (isMultiple) {
-        blueDataValues = this.updateMultipleValues(blueDataValues, blue);
+        blueDataValues = this.updateMultipleDataValues(blueDataValues, blue);
       } else {
         blueDataValues.shift();
         blueDataValues.push(blue);
