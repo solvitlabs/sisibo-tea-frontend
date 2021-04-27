@@ -4,7 +4,11 @@
     <div class="mx-3 my-4">
       <div class="mb-3 font-weight-bold">23rd January, 2021</div>
       <div class="row flex-row flex-nowrap" id="cust-card-row">
-        <div class="shadow-sm cust-card ml-3 mr-3 mb-3">
+        <div
+          v-for="(teadataCard, teadataCardIndex) in teadata"
+          :key="teadataCardIndex"
+          class="shadow-sm cust-card ml-3 mr-3 mb-3"
+        >
           <div>
             <img
               class="card-img-top"
@@ -15,11 +19,11 @@
               <div class="d-flex flex-row">
                 <div class="mr-3">
                   <div>Temperature</div>
-                  <h5>20C</h5>
+                  <h5>{{ teadataCard.temperature }}C</h5>
                 </div>
                 <div>
                   <div>Humidity</div>
-                  <h5>20C</h5>
+                  <h5>{{ teadataCard.humidity }}</h5>
                 </div>
               </div>
               <div class="d-flex flex-row">
@@ -29,69 +33,7 @@
                 </div>
                 <div>
                   <div>SnapshotTime</div>
-                  <h5>14:16:30</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-sm cust-card mr-3 mb-3">
-          <div>
-            <img
-              class="card-img-top"
-              src="../assets/images/logo.jpg"
-              alt="Card image cap"
-            />
-            <div class="py-2 px-4">
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>Temperature</div>
-                  <h5>20C</h5>
-                </div>
-                <div>
-                  <div>Humidity</div>
-                  <h5>20C</h5>
-                </div>
-              </div>
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>ExpectedTime</div>
-                  <h5>14:56:30</h5>
-                </div>
-                <div>
-                  <div>SnapshotTime</div>
-                  <h5>14:16:30</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="shadow-sm cust-card mr-3 mb-3">
-          <div>
-            <img
-              class="card-img-top"
-              src="../assets/images/logo.jpg"
-              alt="Card image cap"
-            />
-            <div class="py-2 px-4">
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>Temperature</div>
-                  <h5>20C</h5>
-                </div>
-                <div>
-                  <div>Humidity</div>
-                  <h5>20C</h5>
-                </div>
-              </div>
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>ExpectedTime</div>
-                  <h5>14:56:30</h5>
-                </div>
-                <div>
-                  <div>SnapshotTime</div>
-                  <h5>14:16:30</h5>
+                  <h5>{{ teadataCard.image_time }}</h5>
                 </div>
               </div>
             </div>
@@ -132,7 +74,8 @@ export default {
       humidityChartData: humidityChartData,
       rgbChartData: rgbChartData,
       apiUrl: "http://localhost:3000",
-      teadata: {
+      teadata: null,
+      teadataExtracted: {
         temperature: [],
         red: [],
         green: [],
@@ -152,25 +95,24 @@ export default {
       myChart;
     },
     getMultipleTeadata() {
-      var teadataResponse;
       fetch(`${this.apiUrl}/api/teadata/10`)
         .then((response) => response.json())
         .then((result) => {
-          teadataResponse = JSON.parse(result).teadata;
-          this.extractMultipleTeadata(teadataResponse);
+          this.teadata = JSON.parse(result).teadata;
+          this.extractMultipleTeadata(this.teadata);
         })
         .catch((error) => console.log("error", error));
     },
     extractMultipleTeadata(teadataResponse) {
       for (let k = 0; k < teadataResponse.length; k++) {
         const teadataRow = teadataResponse[k];
-        this.teadata.temperature.push(teadataRow.temperature);
-        this.teadata.humidity.push(teadataRow.humidity);
-        this.teadata.red.push(teadataRow.red);
-        this.teadata.green.push(teadataRow.green);
-        this.teadata.blue.push(teadataRow.blue);
+        this.teadataExtracted.temperature.push(teadataRow.temperature);
+        this.teadataExtracted.humidity.push(teadataRow.humidity);
+        this.teadataExtracted.red.push(teadataRow.red);
+        this.teadataExtracted.green.push(teadataRow.green);
+        this.teadataExtracted.blue.push(teadataRow.blue);
       }
-      this.updateAllCharts(this.teadata, true);
+      this.updateAllCharts(this.teadataExtracted, true);
     },
     getTeadata() {
       var teadata;
@@ -178,7 +120,6 @@ export default {
         .then((response) => response.json())
         .then((result) => {
           teadata = JSON.parse(result);
-          console.log("teadata", teadata.temperature);
           this.updateAllCharts(teadata, false);
         })
         .catch((error) => console.log("error", error));
