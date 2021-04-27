@@ -4,7 +4,7 @@ export const rgbChartData = {
         labels: ['0900', '0906', '0912', '0918', '0924', '0930', '0936', '0942', '0948', '0954'],
         datasets: [{
                 label: 'Red',
-                data: [9, 20, 23, 30, 60, 50, 33, 24, 17, 13],
+                data: [],
                 backgroundColor: [
                     //     'rgba(148, 10, 10, 0.6)',
                     'rgba(0,0,0,0)',
@@ -16,7 +16,7 @@ export const rgbChartData = {
             },
             {
                 label: 'Green',
-                data: [10, 10, 23, 30, 45, 40, 18, 14, 9, 20],
+                data: [],
                 backgroundColor: [
                     //     'rgba(23, 160, 69, 0.6)',
                     'rgba(0,0,0,0)',
@@ -27,7 +27,7 @@ export const rgbChartData = {
                 borderWidth: 3
             }, {
                 label: 'Blue',
-                data: [5, 16, 25, 55, 33, 34, 19, 18, 22, 19],
+                data: [],
                 backgroundColor: [
                     //     'rgba(0, 153, 255, 0.6)'
                     'rgba(0,0,0,0)',
