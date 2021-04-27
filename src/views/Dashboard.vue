@@ -120,6 +120,7 @@ export default {
         .then((response) => response.json())
         .then((result) => {
           teadata = JSON.parse(result);
+          this.updateCards(teadata);
           this.updateAllCharts(teadata, false);
         })
         .catch((error) => console.log("error", error));
@@ -129,6 +130,10 @@ export default {
       setTimeout(() => {
         this.getTeadata();
       }, 360000);
+    },
+    updateCards(teadata) {
+      this.teadata.shift();
+      this.teadata.push(teadata);
     },
     updateAllCharts(teadata, isMultiple) {
       this.updateChart(
