@@ -98,7 +98,7 @@ export default {
       fetch(`${this.apiUrl}/api/teadata/10`)
         .then((response) => response.json())
         .then((result) => {
-          this.teadata = JSON.parse(result);
+          this.teadata = result;
           this.extractMultipleTeadata(this.teadata);
         })
         .catch((error) => console.log("error", error));
