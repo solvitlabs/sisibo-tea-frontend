@@ -74,7 +74,6 @@ export default {
       tempChartData: tempChartData,
       humidityChartData: humidityChartData,
       rgbChartData: rgbChartData,
-      apiUrl: "http://localhost:3000",
       teadata: null,
       teadataExtracted: {
         temperature: [],
@@ -101,7 +100,7 @@ export default {
       myChart;
     },
     getMultipleTeadata() {
-      fetch(`${this.apiUrl}/api/teadata/${this.loginInfo.employeeid}/10`, {
+      fetch(`/api/teadata/${this.loginInfo.employeeid}/10`, {
         headers: {
           token: this.loginInfo.id,
         },
@@ -126,7 +125,7 @@ export default {
     },
     getTeadata() {
       var teadata;
-      fetch(`${this.apiUrl}/api/teadata/${this.loginInfo.employeeid}`, {
+      fetch(`/api/teadata/${this.loginInfo.employeeid}`, {
         headers: {
           token: this.loginInfo.id,
         },
