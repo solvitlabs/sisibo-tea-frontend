@@ -126,7 +126,11 @@ export default {
     },
     getTeadata() {
       var teadata;
-      fetch(`${this.apiUrl}/api/teadata`)
+      fetch(`${this.apiUrl}/api/teadata/${this.loginInfo.employeeid}`, {
+        headers: {
+          token: this.loginInfo.id,
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           teadata = JSON.parse(result);
