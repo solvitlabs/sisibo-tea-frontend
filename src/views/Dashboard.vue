@@ -70,6 +70,7 @@ export default {
   },
   data() {
     return {
+      loginInfo: null,
       tempChartData: tempChartData,
       humidityChartData: humidityChartData,
       rgbChartData: rgbChartData,
@@ -85,6 +86,11 @@ export default {
     };
   },
   methods: {
+    getAuthToken() {
+      const logininfoStored = JSON.parse(localStorage.getItem("logininfo"));
+      this.loginInfo =
+        logininfoStored == null ? null : logininfoStored.logininfo;
+    },
     createChart(chartId, chartData) {
       const ctx = document.getElementById(chartId);
       const myChart = new Chart(ctx, {
@@ -95,7 +101,11 @@ export default {
       myChart;
     },
     getMultipleTeadata() {
-      fetch(`${this.apiUrl}/api/teadata/10`)
+      fetch(`${this.apiUrl}/api/teadata/${this.loginInfo.employeeid}/10`, {
+        headers: {
+          token: this.loginInfo.id,
+        },
+      })
         .then((response) => response.json())
         .then((result) => {
           this.teadata = result;
@@ -211,6 +221,7 @@ export default {
     },
   },
   mounted() {
+    this.getAuthToken();
     this.createChart("temperature-chart", this.tempChartData);
     this.createChart("humidity-chart", this.humidityChartData);
     this.createChart("rgb-chart", this.rgbChartData);
