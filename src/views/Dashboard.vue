@@ -85,7 +85,7 @@ export default {
     };
   },
   methods: {
-    getAuthToken() {
+    getLoginInfo() {
       const logininfoStored = JSON.parse(localStorage.getItem("logininfo"));
       this.loginInfo =
         logininfoStored == null ? null : logininfoStored.logininfo;
@@ -222,7 +222,7 @@ export default {
     },
   },
   mounted() {
-    this.getAuthToken();
+    this.getLoginInfo();
     this.createChart("temperature-chart", this.tempChartData);
     this.createChart("humidity-chart", this.humidityChartData);
     this.createChart("rgb-chart", this.rgbChartData);
