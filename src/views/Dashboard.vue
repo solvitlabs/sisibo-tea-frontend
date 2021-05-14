@@ -124,15 +124,13 @@ export default {
       this.updateAllCharts(this.teadataExtracted, true);
     },
     getTeadata() {
-      var teadata;
       fetch(`/api/teadata/${this.loginInfo.employeeid}`, {
         headers: {
           token: this.loginInfo.id,
         },
       })
         .then((response) => response.json())
-        .then((result) => {
-          teadata = JSON.parse(result);
+        .then((teadata) => {
           this.updateCards(teadata);
           this.updateAllCharts(teadata, false);
         })
