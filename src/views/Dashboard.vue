@@ -189,7 +189,6 @@ export default {
       // Rerender Chart
       this.createChart(chartDataHtmlId, chartData);
     },
-
     updateRgbChart(red, green, blue, isMultiple) {
       // Update Label
       var rgbChartDataLabels = this.rgbChartData.data.labels;
@@ -223,6 +222,31 @@ export default {
       // Rerender Chart
       this.createChart("rgb-chart", this.rgbChartData);
     },
+    refreshAuthToken() {
+      setTimeout(() => {
+        let token = localStorage.getItem("loginInfo");
+        token = JSON.parse(token);
+        if (token) {
+          fetch("http://localhost:3000/api/tokens", {
+            method: "put",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: token.logininfo.id,
+              extend: true,
+            }),
+          })
+            .then((response) =>
+              console.log("token refreshed successfully", response.status)
+            )
+            .catch((err) => console.log(err));
+        } else {
+          this.logout();
+        }
+      }, 600000);
+    },
     logout() {
       localStorage.clear();
       this.$router.push("/");
@@ -235,6 +259,7 @@ export default {
     this.createChart("rgb-chart", this.rgbChartData);
     this.getMultipleTeadata();
     this.watchForTeadata();
+    this.refreshAuthToken();
   },
 };
 </script>
