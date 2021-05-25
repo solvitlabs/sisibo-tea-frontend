@@ -3,7 +3,7 @@
     <Navbar />
     <div class="mx-3 my-4">
       <div class="row flex-row flex-nowrap justify-content-between">
-        <div class="mb-3 font-weight-bold">23rd January, 2021</div>
+        <div class="mb-3 font-weight-bold">{{ dateToday }}</div>
         <div class="btn btn-light" @click="logout()">Logout</div>
       </div>
       <div class="row flex-row flex-nowrap" id="cust-card-row">
@@ -73,6 +73,7 @@ export default {
   },
   data() {
     return {
+      dateToday: null,
       loginInfo: null,
       tempChartData: tempChartData,
       humidityChartData: humidityChartData,
@@ -88,6 +89,16 @@ export default {
     };
   },
   methods: {
+    getDateToday() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      this.dateToday = mm + "/" + dd + "/" + yyyy;
+    },
     getLoginInfo() {
       const logininfoStored = JSON.parse(localStorage.getItem("logininfo"));
       this.loginInfo =
@@ -253,6 +264,7 @@ export default {
     },
   },
   mounted() {
+    this.getDateToday();
     this.getLoginInfo();
     this.createChart("temperature-chart", this.tempChartData);
     this.createChart("humidity-chart", this.humidityChartData);
