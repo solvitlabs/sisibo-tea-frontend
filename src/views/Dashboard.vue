@@ -15,7 +15,7 @@
           <div>
             <img
               class="card-img-top"
-              src="../assets/images/logo.jpg"
+              :src="missiondataCard.image"
               alt="Card image cap"
             />
             <div class="py-2 px-4">
