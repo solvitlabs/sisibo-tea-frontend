@@ -2,7 +2,10 @@
   <div>
     <Navbar />
     <div class="mx-3 my-4">
-      <div class="mb-3 font-weight-bold">23rd January, 2021</div>
+      <div class="row flex-row flex-nowrap justify-content-between">
+        <div class="mb-3 font-weight-bold">23rd January, 2021</div>
+        <div class="btn btn-light" @click="logout()">Logout</div>
+      </div>
       <div class="row flex-row flex-nowrap" id="cust-card-row">
         <div
           v-for="(teadataCard, teadataCardIndex) in teadata"
@@ -219,6 +222,10 @@ export default {
       }
       // Rerender Chart
       this.createChart("rgb-chart", this.rgbChartData);
+    },
+    logout() {
+      localStorage.clear();
+      this.$router.push("/");
     },
   },
   mounted() {
