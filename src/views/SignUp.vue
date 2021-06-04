@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="grid-margin stretch-card" id="signup-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
@@ -64,13 +63,11 @@
 
 
 <script>
-import Navbar from "../layout/Navbar";
 import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "sign-up",
   components: {
-    Navbar,
     FooterSection,
   },
   data() {

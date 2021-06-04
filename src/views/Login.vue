@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="grid-margin stretch-card" id="login-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
@@ -58,13 +57,11 @@
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import "sweetalert2/dist/sweetalert2.min.css";
-import Navbar from "../layout/Navbar";
 import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "login",
   components: {
-    Navbar,
     FooterSection,
   },
   data() {
@@ -105,11 +102,14 @@ export default {
           email: this.email,
           password: this.password,
         }),
-      }).then((response) => {
-        if (response.status === 200) {
+      })
+      .then(response => response.json())
+      .then((data) => {
+        data = typeof data === 'object' && data.employeeId && data.id ? data : false;
+        if (data) {
           localStorage.setItem(
             "loginInfo",
-            JSON.stringify({ logininfo: response.body })
+            JSON.stringify({ logininfo: data })
           );
           this.$router.push("/dashboard");
         }

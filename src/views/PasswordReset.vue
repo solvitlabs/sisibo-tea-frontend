@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="grid-margin stretch-card" id="passwordreset-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
@@ -45,13 +44,11 @@
 </template>
 
 <script>
-import Navbar from "../layout/Navbar";
 import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "password-reset",
   components: {
-    Navbar,
     FooterSection,
   },
   data() {

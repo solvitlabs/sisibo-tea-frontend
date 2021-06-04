@@ -44,6 +44,7 @@ export const rgbChartData = {
             duration: 0,
         },
         responsive: true,
+        maintainAspectRatio: false,
         lineTension: 1,
         scales: {
             yAxes: [{
@@ -52,7 +53,8 @@ export const rgbChartData = {
                     padding: 25,
                 }
             }]
-        }
+        },
+        events: []
     }
 }
 

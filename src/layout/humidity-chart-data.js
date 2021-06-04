@@ -19,6 +19,7 @@ export const humidityChartData = {
             duration: 0,
         },
         responsive: true,
+        maintainAspectRatio: false,
         lineTension: 1,
         scales: {
             yAxes: [{
@@ -27,7 +28,8 @@ export const humidityChartData = {
                     padding: 25,
                 }
             }]
-        }
+        },
+        events: []
     }
 }
 

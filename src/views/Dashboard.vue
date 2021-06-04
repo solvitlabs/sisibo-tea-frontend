@@ -2,52 +2,60 @@
   <div>
     <Navbar />
     <div class="mx-3 my-4">
-      <div class="mb-3 font-weight-bold">23rd January, 2021</div>
-      <div class="row flex-row flex-nowrap" id="cust-card-row">
-        <div
-          v-for="(teadataCard, teadataCardIndex) in teadata"
-          :key="teadataCardIndex"
-          class="shadow-sm cust-card ml-3 mr-3 mb-3"
-        >
-          <div>
-            <img
-              class="card-img-top"
-              src="../assets/images/logo.jpg"
-              alt="Card image cap"
-            />
-            <div class="py-2 px-4">
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>Temperature</div>
-                  <h5>{{ teadataCard.temperature }}C</h5>
+      <div class="mb-3 font-weight-bold text-right pr-5">23rd January, 2021</div>
+      <div class="chart-container">
+        <div class="row flex-row flex-nowrap" id="cust-card-row">
+          <div
+            v-for="(teadataCard, teadataCardIndex) in teadata"
+            :key="teadataCardIndex"
+            class="shadow-sm cust-card ml-3 mr-3 mb-3"
+          >
+            <div>
+              <img
+                class="card-img-top"
+                src="../assets/images/logo.jpg"
+                alt="Card image cap"
+              />
+              <div class="py-2 px-4">
+                <div class="d-flex flex-row">
+                  <div class="mr-3">
+                    <div>Temperature</div>
+                    <h5>{{ teadataCard.temperature }}C</h5>
+                  </div>
+                  <div>
+                    <div>Humidity</div>
+                    <h5>{{ teadataCard.humidity }}</h5>
+                  </div>
                 </div>
-                <div>
-                  <div>Humidity</div>
-                  <h5>{{ teadataCard.humidity }}</h5>
-                </div>
-              </div>
-              <div class="d-flex flex-row">
-                <div class="mr-3">
-                  <div>ExpectedTime</div>
-                  <h5>14:56:30</h5>
-                </div>
-                <div>
-                  <div>SnapshotTime</div>
-                  <h5>{{ teadataCard.image_time }}</h5>
+                <div class="d-flex flex-row">
+                  <div class="mr-3">
+                    <div>ExpectedTime</div>
+                    <h5>14:56:30</h5>
+                  </div>
+                  <div>
+                    <div>SnapshotTime</div>
+                    <h5>{{ teadataCard.image_time }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="mx-3 my-4">
-        <canvas id="temperature-chart"></canvas>
+      <div class="chart-container">
+        <div class="charts card py-5 shadow">
+          <canvas id="temperature-chart"></canvas>
+        </div>
       </div>
-      <div class="mx-3 my-4">
-        <canvas id="humidity-chart"></canvas>
+      <div class="chart-container">
+        <div class="charts card py-5 shadow">
+          <canvas id="humidity-chart"></canvas>
+        </div>
       </div>
-      <div class="mx-3 my-4">
-        <canvas id="rgb-chart"></canvas>
+      <div class="chart-container">
+        <div class="charts card py-5 shadow">
+          <canvas id="rgb-chart"></canvas>
+        </div>
       </div>
     </div>
     <FooterSection />
@@ -98,7 +106,8 @@ export default {
       fetch(`${this.apiUrl}/api/teadata/10`)
         .then((response) => response.json())
         .then((result) => {
-          this.teadata = JSON.parse(result);
+          //this.teadata = JSON.parse(result);
+          this.teadata = result;
           this.extractMultipleTeadata(this.teadata);
         })
         .catch((error) => console.log("error", error));
@@ -209,6 +218,68 @@ export default {
       // Rerender Chart
       this.createChart("rgb-chart", this.rgbChartData);
     },
+    refreshAuthToken() {
+      setTimeout(() => {
+        let token = localStorage.getItem("loginInfo");
+        token = JSON.parse(token);
+        if (token) {
+          fetch("http://localhost:3000/api/tokens", {
+            method: "put",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id: token.logininfo.id,
+              extend: true,
+            }),
+          })
+            .then((response) => {
+              if(response.status == 200){
+                console.log("token refreshed successfully", response.status)
+              }else{
+                throw null;
+              } 
+            })
+            .catch(() => this.logout());
+        } else {
+          this.logout();
+        }
+      }, 60000);
+    },
+    logout() {
+      let token = JSON.parse(localStorage.getItem('loginInfo'))
+      token = token.logininfo
+      token = token.id
+      fetch(`http://localhost:3000/api/tokens/${token}`, {
+        method: "delete"
+       })
+      .then((response) =>{
+        console.log("session terminated", response.status)
+        localStorage.removeItem('loginInfo')
+        this.$router.push("/");
+      })
+      .catch(() =>{
+        localStorage.removeItem('loginInfo')
+        this.$router.push("/");
+      });
+    }
+  },
+  beforeMount(){
+    let token = JSON.parse(localStorage.getItem('loginInfo'))
+    token = token.logininfo
+    token = token.id
+    if(token){
+      fetch(`http://localhost:3000/api/tokens/${token}`)
+      .then(response => {
+        if(!(response.status == 200)){
+          this.logout()
+        }
+      })
+      .catch(()=> this.logout())
+    }else{
+      this.logout()
+    }
   },
   mounted() {
     this.createChart("temperature-chart", this.tempChartData);
@@ -216,6 +287,7 @@ export default {
     this.createChart("rgb-chart", this.rgbChartData);
     this.getMultipleTeadata();
     this.watchForTeadata();
+    this.refreshAuthToken();
   },
 };
 </script>
@@ -235,5 +307,42 @@ export default {
 
 .cust-card-body {
   white-space: normal;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+  .chart-container {
+    margin-bottom: 10vh;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .chart-container {
+    margin: 5vh;
+  }
+  .charts {
+    border-radius: 20px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .chart-container {
+    min-height: 85vh;
+  }
+  .charts {
+    height: 500px;
+  }
+}
+
+/* X-Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) {
+
 }
 </style>

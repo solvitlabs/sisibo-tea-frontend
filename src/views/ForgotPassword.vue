@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Navbar />
     <div class="grid-margin stretch-card" id="forgotpassword-page">
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
@@ -19,6 +18,13 @@
               <button type="submit" class="btn btn-success mr-2">
                 Reset password
               </button>
+              <div class="form-group mt-3">
+                <div>
+                  <router-link class="link" to="/">
+                    Back to login?
+                  </router-link>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -31,13 +37,11 @@
 <script>
 import Swal from "sweetalert2/dist/sweetalert2.min.js";
 import "sweetalert2/dist/sweetalert2.min.css";
-import Navbar from "../layout/Navbar";
 import FooterSection from "../layout/FooterSection";
 
 export default {
   name: "forgot-password",
   components: {
-    Navbar,
     FooterSection,
   },
   data() {
