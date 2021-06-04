@@ -20,7 +20,7 @@
                 <div class="d-flex flex-row">
                   <div class="mr-3">
                     <div>Temperature</div>
-                    <h5>{{ teadataCard.temperature }}C</h5>
+                    <h5>{{ teadataCard.temperature }}&deg;C</h5>
                   </div>
                   <div>
                     <div>Humidity</div>
