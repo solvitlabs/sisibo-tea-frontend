@@ -2,7 +2,7 @@
   <div>
     <Navbar />
     <div class="mx-3 my-4">
-      <div class="mb-3 font-weight-bold text-right pr-5">{{ dateToday }}</div>
+      <div class="mb-3 font-weight-bold text-right pr-5">23rd January, 2021</div>
       <div class="chart-container">
         <div class="row flex-row flex-nowrap" id="cust-card-row">
           <div
@@ -105,7 +105,7 @@ export default {
       this.dateToday = mm + "/" + dd + "/" + yyyy;
     },
     getLoginInfo() {
-      const logininfoStored = JSON.parse(localStorage.getItem("loginInfo"));
+      const logininfoStored = JSON.parse(localStorage.getItem("logininfo"));
       this.loginInfo =
         logininfoStored == null ? null : logininfoStored.logininfo;
     },
@@ -119,9 +119,9 @@ export default {
       myChart;
     },
     getMultipleTeadata() {
-      fetch(`http://localhost:3000/api/teadata/10`, {
+      fetch(`/api/teadata/${this.loginInfo.employeeid}/10`, {
         headers: {
-          token: this.loginInfo.id
+          token: this.loginInfo.id,
         },
       })
         .then((response) => response.json())
@@ -143,7 +143,7 @@ export default {
       this.updateAllCharts(this.teadataExtracted, true);
     },
     getTeadata() {
-      fetch(`http://localhost:3000/api/teadata/`, {
+      fetch(`/api/teadata/${this.loginInfo.employeeid}`, {
         headers: {
           token: this.loginInfo.id,
         },
@@ -243,7 +243,7 @@ export default {
         let token = localStorage.getItem("loginInfo");
         token = JSON.parse(token);
         if (token) {
-          fetch("http://localhost:3000/api/tokens", {
+          fetch("/api/tokens", {
             method: "put",
             headers: {
               Accept: "application/json",
@@ -271,7 +271,7 @@ export default {
       let token = JSON.parse(localStorage.getItem('loginInfo'))
       token = token.logininfo
       token = token.id
-      fetch(`http://localhost:3000/api/tokens/${token}`, {
+      fetch(`/api/tokens/${token}`, {
         method: "delete"
        })
       .then((response) =>{
@@ -290,7 +290,7 @@ export default {
     token = token.logininfo
     token = token.id
     if(token){
-      fetch(`http://localhost:3000/api/tokens/${token}`)
+      fetch(`/api/tokens/${token}`)
       .then(response => {
         if(!(response.status == 200)){
           this.logout()
