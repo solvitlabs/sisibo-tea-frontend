@@ -34,7 +34,7 @@
                   </div>
                   <div>
                     <div>SnapshotTime</div>
-                    <h5>{{ teadataCard.image_time }}</h5>
+                    <h5 style="font-size: 0.95rem;">{{ teadataCard.image_time.split('T')[0] }}<br>{{ teadataCard.image_time.split('T')[1] }}</h5>
                   </div>
                 </div>
               </div>
@@ -345,6 +345,12 @@ export default {
   }
   .charts {
     border-radius: 20px;
+    transition: all .4s ease-in-out;
+    cursor: pointer;
+  }
+  .charts:hover {
+    transform: translateY(-.5rem);
+    box-shadow: 4px 4px 7px rgba(0, 0,  0,  .5); 
   }
 }
 
