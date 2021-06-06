@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="top">
     <Navbar />
     <div class="mx-3 my-4">
       <div class="mb-3 font-weight-bold text-right pr-5">{{ dateToday }}</div>
@@ -42,17 +42,17 @@
           </div>
         </div>
       </div>
-      <div class="chart-container">
+      <div class="chart-container" id="temperature">
         <div class="charts card py-5 shadow">
           <canvas id="temperature-chart"></canvas>
         </div>
       </div>
-      <div class="chart-container">
+      <div class="chart-container" id="humidity">
         <div class="charts card py-5 shadow">
           <canvas id="humidity-chart"></canvas>
         </div>
       </div>
-      <div class="chart-container">
+      <div class="chart-container" id="rgb">
         <div class="charts card py-5 shadow">
           <canvas id="rgb-chart"></canvas>
         </div>

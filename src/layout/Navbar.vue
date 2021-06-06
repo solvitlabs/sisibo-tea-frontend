@@ -1,30 +1,36 @@
 <template>
   <div>
-    <nav class="navbar navbar-light bg-white shadow">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
       <router-link class="navbar-brand" to="/">SISIBO TEA FACTORY</router-link>
-      <button
-        class="navbar-toggler collapsed"
-        id="navbarBtn"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSidebar"
-        aria-controls="navbarSidebar"
-        aria-label="Toggle navigation"
-        @click="toggleSidebar()"
-      >
+      <button class="navbar-toggler" 
+              id="navbarBtn"
+              @click="toggleSidebar()"
+              type="button" data-toggle="collapse" 
+              data-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" 
+              aria-expanded="false" 
+              aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse" id="navbarSidebar">
+
+      <div class="collapse navbar-collapse" id="navbarSidebar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <router-link class="nav-link bg-light pl-2 mt-1" to="/">Login</router-link>
-            <router-link class="nav-link bg-light pl-2 mt-1" to="/signup">Sign Up</router-link>
-            <router-link class="nav-link bg-light pl-2 mt-1" to="/dashboard"
-              >Dashboard</router-link
-            >
-            <span class="nav-link border-0 bg-light pl-2 mt-1" style="cursor:pointer;" @click="logout()">Logout</span>
+          <li class="nav-item">
+            <a class="nav-link bg-light px-lg-3 mt-1" href="#top">captures</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg-light px-lg-3 mt-1" href="#temperature">temperature</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg-light px-lg-3 mt-1" href="#humidity">humidity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link bg-light px-lg-3 mt-1" href="#rgb">rgb</a>
           </li>
         </ul>
+        <form class="form-inline my-2 my-lg-0" @submit.prevent="logout()">
+          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Logout</button>
+        </form>
       </div>
     </nav>
   </div>
