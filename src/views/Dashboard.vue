@@ -129,7 +129,7 @@ export default {
           this.teadata = result;
           this.extractMultipleTeadata(this.teadata);
         })
-        .catch((error) => console.log("error", error));
+        .catch((error) => console.error(error));
     },
     extractMultipleTeadata(teadataResponse) {
       for (let k = 0; k < teadataResponse.length; k++) {
@@ -159,7 +159,7 @@ export default {
     watchForTeadata() {
       setTimeout(() => {
         this.getTeadata();
-      }, 360000);
+      }, 60000);
     },
     updateCards(teadata) {
       this.teadata.shift();
@@ -358,6 +358,7 @@ export default {
 @media (min-width: 992px) {
   .chart-container {
     min-height: 85vh;
+    margin: 10vh;
   }
   .charts {
     height: 500px;

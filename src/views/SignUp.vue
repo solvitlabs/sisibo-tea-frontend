@@ -4,6 +4,7 @@
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
           <form class="forms-sample shadow" @submit.prevent="signUp">
+            <div class="text-white bg-danger w-full text-center">{{error}}</div>
             <div class="card-body">
               <h4>Sign up</h4>
               <div class="form-group">
@@ -72,6 +73,7 @@ export default {
   },
   data() {
     return {
+      error: '',
       email: null,
       firstPassword: null,
       secondPassword: null,
@@ -93,14 +95,20 @@ export default {
             email: this.email,
             password: this.secondPassword,
           }),
-        }).then((response) => {
-          if (response.status === 200) {
+        })
+        .then((response) => response.json())
+        .then((response) => {
+          if (!response) {
             localStorage.setItem(
               "emailNotification",
               JSON.stringify({ emailnotification: 1 })
             );
             this.$router.push("/");
+          }else{
+            throw response;
           }
+        }).catch((error) => {
+          this.error = error.Error;
         });
       }
     },

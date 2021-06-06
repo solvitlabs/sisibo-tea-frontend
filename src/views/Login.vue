@@ -4,6 +4,7 @@
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
           <form class="forms-sample shadow" @submit.prevent="login">
+            <div class="text-white bg-danger w-full text-center">{{error}}</div>
             <div class="card-body">
               <h4>Login</h4>
               <div class="form-group">
@@ -66,6 +67,7 @@ export default {
   },
   data() {
     return {
+      error: '',
       email: null,
       password: null,
       showPasswordError: false,
@@ -105,6 +107,7 @@ export default {
       })
       .then(response => response.json())
       .then((data) => {
+        const error = data;
         data = typeof data === 'object' && data.employeeId && data.id ? data : false;
         if (data) {
           localStorage.setItem(
@@ -112,7 +115,12 @@ export default {
             JSON.stringify({ logininfo: data })
           );
           this.$router.push("/dashboard");
+        }else{
+          throw error||'check your network then try again';
         }
+      })
+      .catch((err) => {
+        this.error = err.Error||'check your network then try again';
       });
     },
   },
