@@ -20,30 +20,26 @@
 
       <div class="collapse navbar-collapse" id="navbarSidebar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li>
             <a class="nav-link bg-white px-lg-3 mt-1" href="#top">Snapshots</a>
           </li>
-          <li class="nav-item">
+          <li>
             <a class="nav-link bg-white px-lg-3 mt-1" href="#temperature"
               >Temperature</a
             >
           </li>
-          <li class="nav-item">
+          <li>
             <a class="nav-link bg-white px-lg-3 mt-1" href="#humidity"
               >Humidity</a
             >
           </li>
-          <li class="nav-item">
+          <li>
             <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">RGB</a>
           </li>
         </ul>
-        <button
-          class="btn btn-outline-success my-2 my-sm-0"
-          type="submit"
-          @click="logout()"
-        >
+        <div class="link my-2 my-sm-0" type="submit" @click="logout()">
           Logout
-        </button>
+        </div>
       </div>
     </nav>
   </div>
