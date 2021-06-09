@@ -20,9 +20,7 @@
               </button>
               <div class="form-group mt-3">
                 <div>
-                  <router-link class="link" to="/">
-                    Back to login?
-                  </router-link>
+                  <router-link class="link" to="/"> Back to login</router-link>
                 </div>
               </div>
             </div>
