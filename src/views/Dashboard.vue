@@ -3,61 +3,59 @@
     <Navbar />
     <div class="mx-3 my-4">
       <div class="mb-3 font-weight-bold text-right pr-5">{{ dateToday }}</div>
-      <div class="chart-container">
-        <div class="row flex-row flex-nowrap" id="cust-card-row">
-          <div
-            v-for="(teadataCard, teadataCardIndex) in teadata"
-            :key="teadataCardIndex"
-            class="shadow-sm cust-card ml-3 mr-3 mb-3"
-          >
-            <div>
-              <img
-                class="card-img-top"
-                src="../assets/images/logo.jpg"
-                alt="Card image cap"
-              />
-              <div class="py-2 px-4">
-                <div class="d-flex flex-row">
-                  <div class="mr-3">
-                    <div>Temperature</div>
-                    <h5>{{ teadataCard.temperature }}&deg;C</h5>
-                  </div>
-                  <div>
-                    <div>Humidity</div>
-                    <h5>{{ teadataCard.humidity }}</h5>
-                  </div>
+      <div class="row flex-row flex-nowrap" id="cust-card-row">
+        <div
+          v-for="(teadataCard, teadataCardIndex) in teadata"
+          :key="teadataCardIndex"
+          class="shadow-sm cust-card ml-3 mr-3 mb-3"
+        >
+          <div>
+            <img
+              class="card-img-top"
+              src="../assets/images/logo.jpg"
+              alt="Card image cap"
+            />
+            <div class="py-2 px-4">
+              <div class="d-flex flex-row">
+                <div class="mr-3">
+                  <div>Temperature</div>
+                  <h5>{{ teadataCard.temperature }}&deg;C</h5>
                 </div>
-                <div class="d-flex flex-row">
-                  <div class="mr-3">
-                    <div>ExpectedTime</div>
-                    <h5>14:56:30</h5>
-                  </div>
-                  <div>
-                    <div>SnapshotTime</div>
-                    <h5 style="font-size: 0.95rem">
-                      {{ teadataCard.image_time.split("T")[0] }}<br />{{
-                        teadataCard.image_time.split("T")[1]
-                      }}
-                    </h5>
-                  </div>
+                <div>
+                  <div>Humidity</div>
+                  <h5>{{ teadataCard.humidity }}</h5>
+                </div>
+              </div>
+              <div class="d-flex flex-row">
+                <div class="mr-3">
+                  <div>ExpectedTime</div>
+                  <h5>14:56:30</h5>
+                </div>
+                <div>
+                  <div>SnapshotTime</div>
+                  <h5 style="font-size: 0.95rem">
+                    {{ teadataCard.image_time.split("T")[0] }}<br />{{
+                      teadataCard.image_time.split("T")[1]
+                    }}
+                  </h5>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="chart-container" id="temperature">
-        <div class="charts card py-5 shadow">
+      <div id="temperature">
+        <div class="charts card py-4 px-3 my-4 shadow-sm">
           <canvas id="temperature-chart"></canvas>
         </div>
       </div>
-      <div class="chart-container" id="humidity">
-        <div class="charts card py-5 shadow">
+      <div id="humidity">
+        <div class="charts card py-4 px-3 my-4 shadow-sm">
           <canvas id="humidity-chart"></canvas>
         </div>
       </div>
-      <div class="chart-container" id="rgb">
-        <div class="charts card py-5 shadow">
+      <div id="rgb">
+        <div class="charts card py-4 px-3 my-4 shadow-sm">
           <canvas id="rgb-chart"></canvas>
         </div>
       </div>
@@ -335,45 +333,9 @@ export default {
   white-space: normal;
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-  .chart-container {
-    margin-bottom: 10vh;
-  }
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .chart-container {
-    margin: 5vh;
-  }
-  .charts {
-    border-radius: 20px;
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
-  }
-  .charts:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
-  }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .chart-container {
-    min-height: 85vh;
-    margin: 10vh;
-  }
-  .charts {
-    height: 500px;
-  }
-}
-
-/* X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
-
-/* XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
+.charts {
+  border-radius: 10px;
+  transform: translateY(-0.5rem);
+  transition: all 0.4s ease-in-out;
 }
 </style>
