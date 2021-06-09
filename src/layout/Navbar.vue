@@ -21,20 +21,20 @@
       <div class="collapse navbar-collapse" id="navbarSidebar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link bg-white px-lg-3 mt-1" href="#top">captures</a>
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#top">Snapshots</a>
           </li>
           <li class="nav-item">
             <a class="nav-link bg-white px-lg-3 mt-1" href="#temperature"
-              >temperature</a
+              >Temperature</a
             >
           </li>
           <li class="nav-item">
             <a class="nav-link bg-white px-lg-3 mt-1" href="#humidity"
-              >humidity</a
+              >Humidity</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">rgb</a>
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">RGB</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" @submit.prevent="logout()">
