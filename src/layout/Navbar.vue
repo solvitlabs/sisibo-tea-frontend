@@ -37,11 +37,13 @@
             <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">RGB</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" @submit.prevent="logout()">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Logout
-          </button>
-        </form>
+        <button
+          class="btn btn-outline-success my-2 my-sm-0"
+          type="submit"
+          @click="logout()"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   </div>
