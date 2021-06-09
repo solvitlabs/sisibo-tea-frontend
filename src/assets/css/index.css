@@ -2,7 +2,7 @@
 #login-page,
 #forgotpassword-page,
 #passwordreset-page {
-  background: #28A745 url("~@/assets/images/plantation-166515_1280.jpg") no-repeat center 5% fixed;
+  background: #28A745 url("~@/assets/images/plantation-166515_1280.jpg") repeat center 5% fixed;
   padding-top: 5rem;
   padding-bottom: 7rem;
 }
