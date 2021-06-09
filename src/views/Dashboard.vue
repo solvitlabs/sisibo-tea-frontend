@@ -2,7 +2,7 @@
   <div id="top">
     <Navbar />
     <div class="mx-3 my-4">
-      <div class="mb-3 font-weight-bold text-right pr-5">{{ dateToday }}</div>
+      <div class="mb-3 font-weight-bold">{{ dateToday }}</div>
       <div class="row flex-row flex-nowrap" id="cust-card-row">
         <div
           v-for="(teadataCard, teadataCardIndex) in teadata"
