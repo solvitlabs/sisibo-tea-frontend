@@ -34,7 +34,11 @@
                   </div>
                   <div>
                     <div>SnapshotTime</div>
-                    <h5 style="font-size: 0.95rem;">{{ teadataCard.image_time.split('T')[0] }}<br>{{ teadataCard.image_time.split('T')[1] }}</h5>
+                    <h5 style="font-size: 0.95rem">
+                      {{ teadataCard.image_time.split("T")[0] }}<br />{{
+                        teadataCard.image_time.split("T")[1]
+                      }}
+                    </h5>
                   </div>
                 </div>
               </div>
@@ -121,7 +125,7 @@ export default {
     getMultipleTeadata() {
       fetch(`http://localhost:3000/api/teadata/10`, {
         headers: {
-          token: this.loginInfo.id
+          token: this.loginInfo.id,
         },
       })
         .then((response) => response.json())
@@ -255,11 +259,11 @@ export default {
             }),
           })
             .then((response) => {
-              if(response.status == 200){
-                console.log("token refreshed successfully", response.status)
-              }else{
+              if (response.status == 200) {
+                console.log("token refreshed successfully", response.status);
+              } else {
                 throw null;
-              } 
+              }
             })
             .catch(() => this.logout());
         } else {
@@ -268,37 +272,37 @@ export default {
       }, 60000);
     },
     logout() {
-      let token = JSON.parse(localStorage.getItem('loginInfo'))
-      token = token.logininfo
-      token = token.id
+      let token = JSON.parse(localStorage.getItem("loginInfo"));
+      token = token.logininfo;
+      token = token.id;
       fetch(`http://localhost:3000/api/tokens/${token}`, {
-        method: "delete"
-       })
-      .then((response) =>{
-        console.log("session terminated", response.status)
-        localStorage.removeItem('loginInfo')
-        this.$router.push("/");
+        method: "delete",
       })
-      .catch(() =>{
-        localStorage.removeItem('loginInfo')
-        this.$router.push("/");
-      });
-    }
+        .then((response) => {
+          console.log("session terminated", response.status);
+          localStorage.removeItem("loginInfo");
+          this.$router.push("/");
+        })
+        .catch(() => {
+          localStorage.removeItem("loginInfo");
+          this.$router.push("/");
+        });
+    },
   },
-  beforeMount(){
-    let token = JSON.parse(localStorage.getItem('loginInfo'))
-    token = token.logininfo
-    token = token.id
-    if(token){
+  beforeMount() {
+    let token = JSON.parse(localStorage.getItem("loginInfo"));
+    token = token.logininfo;
+    token = token.id;
+    if (token) {
       fetch(`http://localhost:3000/api/tokens/${token}`)
-      .then(response => {
-        if(!(response.status == 200)){
-          this.logout()
-        }
-      })
-      .catch(()=> this.logout())
-    }else{
-      this.logout()
+        .then((response) => {
+          if (!(response.status == 200)) {
+            this.logout();
+          }
+        })
+        .catch(() => this.logout());
+    } else {
+      this.logout();
     }
   },
   mounted() {
@@ -345,12 +349,12 @@ export default {
   }
   .charts {
     border-radius: 20px;
-    transition: all .4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     cursor: pointer;
   }
   .charts:hover {
-    transform: translateY(-.5rem);
-    box-shadow: 4px 4px 7px rgba(0, 0,  0,  .5); 
+    transform: translateY(-0.5rem);
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.5);
   }
 }
 
@@ -367,11 +371,9 @@ export default {
 
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
 }
 
 /* XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
-
 }
 </style>

@@ -4,7 +4,9 @@
       <div class="col d-flex justify-content-center">
         <div class="card w-50">
           <form class="forms-sample shadow" @submit.prevent="signUp">
-            <div class="text-white bg-danger w-full text-center">{{error}}</div>
+            <div class="text-white bg-danger w-full text-center">
+              {{ error }}
+            </div>
             <div class="card-body">
               <h4>Sign up</h4>
               <div class="form-group">
@@ -49,9 +51,7 @@
                 <button class="btn btn-light">Cancel</button>
               </div>
               <div class="form-group">
-                <router-link class="link" to="/">
-                  Login instead
-                </router-link>
+                <router-link class="link" to="/"> Login instead </router-link>
               </div>
             </div>
           </form>
@@ -73,7 +73,7 @@ export default {
   },
   data() {
     return {
-      error: '',
+      error: "",
       email: null,
       firstPassword: null,
       secondPassword: null,
@@ -96,20 +96,21 @@ export default {
             password: this.secondPassword,
           }),
         })
-        .then((response) => response.json())
-        .then((response) => {
-          if (!response) {
-            localStorage.setItem(
-              "emailNotification",
-              JSON.stringify({ emailnotification: 1 })
-            );
-            this.$router.push("/");
-          }else{
-            throw response;
-          }
-        }).catch((error) => {
-          this.error = error.Error;
-        });
+          .then((response) => response.json())
+          .then((response) => {
+            if (!response) {
+              localStorage.setItem(
+                "emailNotification",
+                JSON.stringify({ emailnotification: 1 })
+              );
+              this.$router.push("/");
+            } else {
+              throw response;
+            }
+          })
+          .catch((error) => {
+            this.error = error.Error;
+          });
       }
     },
   },
