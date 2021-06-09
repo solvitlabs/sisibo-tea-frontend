@@ -33,7 +33,7 @@
                 </div>
                 <div>
                   <div>SnapshotTime</div>
-                  <h5 style="font-size: 0.95rem">
+                  <h5>
                     {{ teadataCard.image_time.split("T")[0] }}<br />{{
                       teadataCard.image_time.split("T")[1]
                     }}
