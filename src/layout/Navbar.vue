@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav
-      class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm"
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm"
     >
       <router-link class="navbar-brand" to="/">SISIBO TEA FACTORY</router-link>
       <button
@@ -21,24 +21,24 @@
       <div class="collapse navbar-collapse" id="navbarSidebar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link bg-light px-lg-3 mt-1" href="#top">captures</a>
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#top">captures</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link bg-light px-lg-3 mt-1" href="#temperature"
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#temperature"
               >temperature</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link bg-light px-lg-3 mt-1" href="#humidity"
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#humidity"
               >humidity</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link bg-light px-lg-3 mt-1" href="#rgb">rgb</a>
+            <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">rgb</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" @submit.prevent="logout()">
-          <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
             Logout
           </button>
         </form>
