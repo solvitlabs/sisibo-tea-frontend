@@ -1,8 +1,14 @@
+:root {
+  --primary: #28A745;
+  --secondary: #A5331D;
+  --tertiary: #ECD393;
+}
+
 #signup-page,
 #login-page,
 #forgotpassword-page,
 #passwordreset-page {
-  background: #28A745 url("~@/assets/images/plantation-166515_1280.jpg") repeat center 5% fixed;
+  background: var(--primary) url("~@/assets/images/plantation-166515_1280.jpg") repeat center 5% fixed;
   padding-top: 5rem;
   padding-bottom: 7rem;
 }
@@ -17,31 +23,21 @@
 }
 
 .link:hover {
-  color: #28a745;
+  color: var(--primary);
 }
 
-:root {
-  --primary: #28A745;
-  --secondary: #A5331D;
-  --tertiary: #ECD393;
-}
-
-/* width */
 ::-webkit-scrollbar {
   width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px var(--secondary);
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--primary);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--tertiary);
 }
