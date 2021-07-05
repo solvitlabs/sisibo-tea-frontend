@@ -3,7 +3,7 @@
     <div class="mx-3 py-4">
       <h3>Sisibo Tea Factory</h3>
       <div>
-        Created by Donald K, Derrick Mbarani, Gloria Jemutai & Geoffrey Luora
+        Created by Donald K, Derrick Mbarani & Gloria Jemutai
       </div>
       <div>© 2021</div>
     </div>
