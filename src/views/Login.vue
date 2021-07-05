@@ -93,6 +93,7 @@ export default {
           "To Login, verify your email address",
           "success"
         );
+        localStorage.setItem("emailNotification", null)
       }
     },
     login() {

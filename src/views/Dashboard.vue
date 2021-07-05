@@ -71,6 +71,7 @@ import Chart from "chart.js";
 import tempChartData from "../layout/temp-chart-data.js";
 import humidityChartData from "../layout/humidity-chart-data.js";
 import rgbChartData from "../layout/rgb-chart-data.js";
+import { jsPDF } from 'jspdf'
 
 export default {
   name: "dashboard",
@@ -337,5 +338,7 @@ export default {
   border-radius: 10px;
   transform: translateY(-0.5rem);
   transition: all 0.4s ease-in-out;
+  height: 75vh;
+  cursor: pointer;
 }
 </style>

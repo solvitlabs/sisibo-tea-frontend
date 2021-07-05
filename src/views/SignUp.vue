@@ -17,6 +17,7 @@
                   id="email"
                   required
                   v-model="email"
+                  autocomplete = "username"
                 />
               </div>
               <div class="form-group">
@@ -28,6 +29,7 @@
                   minlength="8"
                   required
                   v-model="firstPassword"
+                  autocomplete="new-password"
                 />
               </div>
               <div class="form-group">
@@ -39,6 +41,7 @@
                   minlength="8"
                   required
                   v-model="secondPassword"
+                  autocomplete="new-password"
                 />
               </div>
               <div class="text-danger mb-2" v-show="showPasswordError">
@@ -96,9 +99,8 @@ export default {
             password: this.secondPassword,
           }),
         })
-          .then((response) => response.json())
           .then((response) => {
-            if (!response) {
+            if (response.status == 201) {
               localStorage.setItem(
                 "emailNotification",
                 JSON.stringify({ emailnotification: 1 })
@@ -109,7 +111,9 @@ export default {
             }
           })
           .catch((error) => {
-            this.error = error.Error;
+            if(error.status === 400){
+              this.error = 'User with that email already exits';
+            }
           });
       }
     },

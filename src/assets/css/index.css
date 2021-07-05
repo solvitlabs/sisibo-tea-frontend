@@ -8,7 +8,8 @@
 #login-page,
 #forgotpassword-page,
 #passwordreset-page {
-  background: var(--primary) url("~@/assets/images/plantation-166515_1280.jpg") repeat center 5% fixed;
+  background: var(--primary) url("~@/assets/images/plantation-166515_1280.jpg") no-repeat center 5% fixed;
+  background-size: 100%;
   padding-top: 5rem;
   padding-bottom: 7rem;
 }
