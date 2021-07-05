@@ -36,6 +36,11 @@
           <li>
             <a class="nav-link bg-white px-lg-3 mt-1" href="#rgb">RGB</a>
           </li>
+          <li>
+            <button class="nav-link bg-white px-lg-3 mt-1 border-0" @click="sisiboReport()">
+            Report
+            </button>
+          </li>
         </ul>
         <div class="link my-2 my-sm-0" type="submit" @click="logout()">
           Logout
@@ -46,6 +51,7 @@
 </template>
 
 <script>
+import {bus} from '@/main'
 export default {
   name: "navbar",
   data() {
@@ -54,6 +60,9 @@ export default {
     };
   },
   methods: {
+    sisiboReport(){
+      bus.$emit('GenerateReport', false)
+    },
     toggleSidebar() {
       if (this.isSidebarCollapsed) {
         document.querySelector("#navbarSidebar").classList.add("show");

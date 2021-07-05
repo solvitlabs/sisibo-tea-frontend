@@ -72,6 +72,8 @@ import tempChartData from "../layout/temp-chart-data.js";
 import humidityChartData from "../layout/humidity-chart-data.js";
 import rgbChartData from "../layout/rgb-chart-data.js";
 import { jsPDF } from 'jspdf'
+import 'jspdf-autotable'
+import {bus} from '@/main'
 
 export default {
   name: "dashboard",
@@ -287,6 +289,52 @@ export default {
           this.$router.push("/");
         });
     },
+    generateReport() {
+      fetch(`http://localhost:3000/api/teadata/10`, {
+        headers: {
+          token: this.loginInfo.id,
+        },
+      })
+        .then((response) => response.json())
+        .then((teadata) => {
+          // Landscape export, 2×4 inches
+          const doc = new jsPDF({
+            orientation: "landscape",
+            unit: "in",
+            format: [8, 4]
+          })
+
+          doc.autoTable({
+              styles: { fillColor: [245, 245, 245], fontSize: 11 },
+              headStyles: { halign: 'center', fillColor: [40, 167, 69], fontStyle: 'bold', font: 'helvetica'},
+              bodyStyles: {fontStyle: 'times'},
+              head: [
+                ['id','process id', 'red', 'green', 'blue', 'green', 'temperature', 'humidity', 'time']
+              ],
+              body: [
+                [`${teadata[0].id}`, `${teadata[0].process_id}`, `${teadata[0].red}`, `${teadata[0].green}`, `${teadata[0].blue}`, `${teadata[0].temperature}`, `${teadata[0].humidity}`, `${teadata[0].image_time}`],
+                [`${teadata[1].id}`, `${teadata[1].process_id}`, `${teadata[1].red}`, `${teadata[1].green}`, `${teadata[1].blue}`, `${teadata[1].temperature}`, `${teadata[1].humidity}`, `${teadata[1].image_time}`],
+                [`${teadata[2].id}`, `${teadata[2].process_id}`, `${teadata[2].red}`, `${teadata[2].green}`, `${teadata[2].blue}`, `${teadata[2].temperature}`, `${teadata[2].humidity}`, `${teadata[2].image_time}`],
+                [`${teadata[3].id}`, `${teadata[3].process_id}`, `${teadata[3].red}`, `${teadata[3].green}`, `${teadata[3].blue}`, `${teadata[3].temperature}`, `${teadata[3].humidity}`, `${teadata[3].image_time}`],
+                [`${teadata[4].id}`, `${teadata[4].process_id}`, `${teadata[4].red}`, `${teadata[4].green}`, `${teadata[4].blue}`, `${teadata[4].temperature}`, `${teadata[4].humidity}`, `${teadata[4].image_time}`],
+                [`${teadata[5].id}`, `${teadata[5].process_id}`, `${teadata[5].red}`, `${teadata[5].green}`, `${teadata[5].blue}`, `${teadata[5].temperature}`, `${teadata[5].humidity}`, `${teadata[5].image_time}`],
+                [`${teadata[6].id}`, `${teadata[6].process_id}`, `${teadata[6].red}`, `${teadata[6].green}`, `${teadata[6].blue}`, `${teadata[6].temperature}`, `${teadata[6].humidity}`, `${teadata[6].image_time}`],
+                [`${teadata[7].id}`, `${teadata[7].process_id}`, `${teadata[7].red}`, `${teadata[7].green}`, `${teadata[7].blue}`, `${teadata[7].temperature}`, `${teadata[7].humidity}`, `${teadata[7].image_time}`],
+                [`${teadata[8].id}`, `${teadata[8].process_id}`, `${teadata[8].red}`, `${teadata[8].green}`, `${teadata[8].blue}`, `${teadata[8].temperature}`, `${teadata[8].humidity}`, `${teadata[8].image_time}`],
+                [`${teadata[9].id}`, `${teadata[9].process_id}`, `${teadata[9].red}`, `${teadata[9].green}`, `${teadata[9].blue}`, `${teadata[9].temperature}`, `${teadata[9].humidity}`, `${teadata[9].image_time}`],
+              ],
+            })
+            doc.autoPrint({variant:'non-conform'})
+            doc.save('tea_report.pdf')
+        })
+        .catch((error) => console.log("error", error));
+  },
+  },
+  created(){
+    //  Generate Report
+    bus.$on('GenerateReport', ()=>{
+      this.generateReport()
+    })
   },
   beforeMount() {
     let token = JSON.parse(localStorage.getItem("loginInfo"));

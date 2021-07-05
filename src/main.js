@@ -6,6 +6,8 @@ import "@/assets/css/index.css"
 
 Vue.config.productionTip = false
 
+export const bus = new Vue()
+
 new Vue({
     router,
     render: h => h(App),
